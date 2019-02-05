@@ -82,7 +82,7 @@ void HallBEventRecord(){
        reader.loadRecord(irec);
 
        while(event.nextInRecord()==true){
-	
+	 continue;
 	 event.head()->getStartTime();
      
 	 //Loop over all particles to see how to access detector info.

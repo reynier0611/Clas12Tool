@@ -5,14 +5,17 @@ record #  479 POSITION =   1759637920 , LENGTH =      3687752 , ENTRIES =    100
 record #  480 POSITION =   1763325672 , LENGTH =      2479600 , ENTRIES =    205 , UID =            0            0
 Looks like last record has extra 100 events
 
-Just read event
-timer     : Real Time =   1.55 seconds Cpu Time =   1.56 seconds
+Just reader next()
+timer     : Real Time =   1.45 seconds Cpu Time =   1.43 seconds
 
-Just REC::Particle
-timer     : Real Time =   1.60 seconds Cpu Time =   1.59 seconds
++ reader->read( event)
+timer     : Real Time =   1.66 seconds Cpu Time =   1.66 seconds
+
++ REC::Particle
+timer     : Real Time =   1.69 seconds Cpu Time =   1.68 seconds
 
 Just +  REC::MC
-timer     : Real Time =   1.60 seconds Cpu Time =   1.59 seconds
+timer     : Real Time =   1.69 seconds Cpu Time =   1.69 seconds
 
 +REC::CovMAt
 
@@ -25,7 +28,7 @@ timer     : Real Time =   1.68 seconds Cpu Time =   1.68 seconds
 timer     : Real Time =   2.22 seconds Cpu Time =   2.22 seconds
 
 +REC::SCINT
-timer     : Real Time =   2.49 seconds Cpu Time =   2.49 seconds
+timer     : Real Time =   2.41 seconds Cpu Time =   2.41 seconds
 
 +REC::TRACK
 timer     : Real Time =   2.59 seconds Cpu Time =   2.58 seconds
@@ -34,17 +37,21 @@ timer     : Real Time =   2.59 seconds Cpu Time =   2.58 seconds
 timer     : Real Time =   2.63 seconds Cpu Time =   2.63 seconds
 
 +REC::FT
-timer     : Real Time =   2.62 seconds Cpu Time =   2.62 seconds
-
-
 NO HALLBEVENT sort()
+timer     : Real Time =   2.62 seconds Cpu Time =   2.62 seconds
+timer     : Real Time =   2.45 seconds Cpu Time =   2.45 seconds
 
-timer     : Real Time =   2.33 seconds Cpu Time =   2.33 seconds
+
+
+HALLBEVENT sort()
+timer     : Real Time =   2.74 seconds Cpu Time =   2.73 seconds
 
 HALLBEVENT analysis
-timer     : Real Time =   2.67 seconds Cpu Time =   2.68 seconds
+timer     : Real Time =   2.81 seconds Cpu Time =   2.81 seconds
 
-For 10 files:
+
+
+For 10 files: ??
 timer     : Real Time =  57.23 seconds Cpu Time =  32.23 seconds
 WHY IS TIMING SIGNIFICANTLY WORSE?
 

@@ -85,8 +85,7 @@ void HallBEvent(){
        //7M =  85.74 seconds Cpu Time =  59.70s
        //i.e. using maps is 2.5x slower!
 
-     
-       event.head()->getStartTime();
+        event.head()->getStartTime();
      
        //Loop over all particles to see how to access detector info.
        for(auto& p : event.getDetParticles()){
