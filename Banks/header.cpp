@@ -8,13 +8,40 @@
 
 namespace clas12 {
 
-  header::~header(){}
+  header::header(hipo::dictionary __factory): hipo::bank(__factory.getSchema("REC::EVNT")) {
 
-  void header::init(const char *bankName, hipo::reader &r){
-    initBranches(bankName,r);
-    rn_order = getEntryOrder("NRUN");
-    en_order  = getEntryOrder("NEVENT");
-    trg_order  = getEntryOrder("TRG");
-    st_order  = getEntryOrder("STTime");
+    auto sch=getSchema();
+     
+    rn_order = sch.getEntryOrder("NRUN");
+    en_order  = sch.getEntryOrder("NEVENT");
+    et_order  = sch.getEntryOrder("EVNTime");
+    ty_order  = sch.getEntryOrder("TYPE");
+    ec_order  = sch.getEntryOrder("EvCAT");
+    np_order  = sch.getEntryOrder("NPGP");
+    trg_order  = sch.getEntryOrder("TRG");
+    bcg_order  = sch.getEntryOrder("BCG");
+    lt_order  = sch.getEntryOrder("LT");
+    st_order  = sch.getEntryOrder("STTime");
+    rf_order  = sch.getEntryOrder("RFTime");
+    hel_order  = sch.getEntryOrder("Helic");
+    pt_order  = sch.getEntryOrder("PTIME");
+  }
+
+  header::header(hipo::schema __schema): hipo::bank(__schema) {
+    auto sch=getSchema();
+     
+    rn_order = sch.getEntryOrder("NRUN");
+    en_order  = sch.getEntryOrder("NEVENT");
+    et_order  = sch.getEntryOrder("EVNTime");
+    ty_order  = sch.getEntryOrder("TYPE");
+    ec_order  = sch.getEntryOrder("EvCAT");
+    np_order  = sch.getEntryOrder("NPGP");
+    trg_order  = sch.getEntryOrder("TRG");
+    bcg_order  = sch.getEntryOrder("BCG");
+    lt_order  = sch.getEntryOrder("LT");
+    st_order  = sch.getEntryOrder("STTime");
+    rf_order  = sch.getEntryOrder("RFTime");
+    hel_order  = sch.getEntryOrder("Helic");
+    pt_order  = sch.getEntryOrder("PTIME");
   }
 }

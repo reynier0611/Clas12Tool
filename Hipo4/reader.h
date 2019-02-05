@@ -129,8 +129,10 @@ class readerIndex {
       ~readerIndex(){};
 
       bool canAdvance();
+      bool canAdvanceInRecord();
       bool advance();
-
+      bool loadRecord(int irec);
+      
       int  getEventNumber() { return currentEvent;}
       int  getRecordNumber() { return currentRecord;}
       int  getRecordEventNumber() { return currentRecordEvent;}
@@ -138,6 +140,7 @@ class readerIndex {
       void addSize(int size);
       void addPosition(long position){ recordPosition.push_back(position);}
       long getPosition(int index) { return recordPosition[index];}
+      int getNRecords() const {return recordEvents.size();}
       void rewind(){
         currentRecord = -1;
         currentEvent  = -1;
@@ -176,6 +179,11 @@ class readerIndex {
         bool  next(hipo::event &dataevent);
         void  read(hipo::event &dataevent);
         void  printWarning();
+
+	int getNRecords() const {return readerEventIndex.getNRecords()-1;}
+	bool  nextInRecord();
+	bool loadRecord(int irec);
+ 
       };
 }
 #endif /* HIPOFILE_H */

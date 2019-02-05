@@ -113,10 +113,10 @@ void  reader::readIndex(){
     printf("*** reader:: trailer record event count : %d\n",inputRecord.getEventCount());
     hipo::event event;
     inputRecord.readHipoEvent(event,0);
-    event.show();
+    //   event.show();
     hipo::structure base;
     event.getStructure(base,32111,1);
-    base.show();
+    //base.show();
 
     int rows = base.getSize()/32;
 
@@ -127,8 +127,7 @@ void  reader::readIndex(){
        int  entries  = base.getIntAt ( rows*12 + i*4);
        long uid1     = base.getLongAt( rows*16 + i*8);
        long uid2     = base.getLongAt( rows*24 + i*8);
-       //printf("record # %4d POSITION = %12lu , LENGTH = %12d , ENTRIES = %6d , UID = %12lu %12lu\n",
-          //i,position,length,entries, uid1,uid2);
+       // printf("record # %4d POSITION = %12lu , LENGTH = %12d , ENTRIES = %6d , UID = %12lu %12lu\n",i,position,length,entries, uid1,uid2);
        readerEventIndex.addSize(entries);
        readerEventIndex.addPosition(position);
     }
@@ -170,7 +169,7 @@ void  reader::readDictionary(hipo::dictionary &dict){
   for(int i = 0; i < nevents; i++){
     dictRecord.readHipoEvent(event,i);
     event.getStructure(schemaStructure,120,2);
-    printf("schema : %s\n",schemaStructure.getStringAt(0).c_str());
+    // printf("schema : %s\n",schemaStructure.getStringAt(0).c_str());
     dict.parse(schemaStructure.getStringAt(0).c_str());
   }
 }
@@ -189,6 +188,31 @@ bool  reader::next(){
     }
     return true;
 }
+// bool  reader::nextInRecord(){
+//     if(readerEventIndex.canAdvanceInRecord()==false) return false;
+//     int recordNumber = readerEventIndex.getRecordNumber();
+//     readerEventIndex.advance();
+//     int recordToBeRead = readerEventIndex.getRecordNumber();
+//     if(recordToBeRead!=recordNumber){
+//       long position = readerEventIndex.getPosition(recordToBeRead);
+//       inputRecord.readRecord(inputStream,position,0);
+//       /*printf(" record changed from %d to %d at event %d total event # %d\n",
+//         recordNumber, recordToBeRead,readerEventIndex.getEventNumber(),
+//         readerEventIndex.getMaxEvents());*/
+//     }
+//     return true;
+// }
+  bool  reader::loadRecord(int irec){
+    
+    long position = readerEventIndex.getPosition(irec);
+    inputRecord.readRecord(inputStream,position,0);
+    return readerEventIndex.loadRecord(irec);
+  }
+  bool  reader::nextInRecord(){
+    if(readerEventIndex.canAdvanceInRecord()==false) return false;
+    readerEventIndex.advance();
+    return true;
+  }
 
 void reader::printWarning(){
     #ifndef __LZ4__
@@ -227,7 +251,7 @@ namespace hipo {
       return true;
     }
 
-    if(recordEvents.size() < currentRecord + 2 + 1){
+    if((int)recordEvents.size() < currentRecord + 2 + 1){
       printf("advance(): Warning, reached the limit of events.\n");
       return false;
     }
@@ -241,5 +265,25 @@ namespace hipo {
     if(recordEvents.size()==0) return 0;
     return recordEvents[recordEvents.size()-1];
   }
+  
+  bool readerIndex::loadRecord(int irec){
+    if(irec==0){
+      currentEvent=-1;
+      currentRecord=0;
+      currentRecordEvent = -1;
+      return true;
+    }
+    if(irec+1>(int)recordEvents.size())
+      return false;
+    
+    currentEvent = recordEvents[irec]-1;
+    currentRecord=irec;
+    currentRecordEvent = -1;
+    return true;
+  }
+  bool readerIndex::canAdvanceInRecord(){
+    return (currentEvent<recordEvents[currentRecord+1]-1);
+  }
 
+  
 }

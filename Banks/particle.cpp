@@ -5,18 +5,42 @@
  */
 
 #include "particle.h"
+#include "dictionary.h"
 
 
 namespace clas12 {
 
-void   particle::init(const char *bankName, hipo::reader &r){
-  initBranches(bankName,r);
-  pid_order = getEntryOrder("pid");
-  px_order  = getEntryOrder("px");
-  py_order  = getEntryOrder("py");
-  pz_order  = getEntryOrder("pz");
-}
+  particle::particle(hipo::dictionary __factory): hipo::bank(__factory.getSchema("REC::Particle")) {
+ 
+    auto sch=getSchema();
+    sch.show();
+    pid_order = sch.getEntryOrder("pid");
+    px_order  = sch.getEntryOrder("px");
+    py_order  = sch.getEntryOrder("py");
+    pz_order  = sch.getEntryOrder("pz");
+    vx_order  = sch.getEntryOrder("vx");
+    vy_order  = sch.getEntryOrder("vy");
+    vz_order  = sch.getEntryOrder("vz");
+    ch_order  = sch.getEntryOrder("charge");
+    st_order  = sch.getEntryOrder("status");
+    
+  }
 
-  particle::~particle(){}
+  particle::particle(hipo::schema __schema): hipo::bank(__schema) {
+ 
+    auto sch=getSchema();
+    sch.show();
+    pid_order = sch.getEntryOrder("pid");
+    px_order  = sch.getEntryOrder("px");
+    py_order  = sch.getEntryOrder("py");
+    pz_order  = sch.getEntryOrder("pz");
+    vx_order  = sch.getEntryOrder("vx");
+    vy_order  = sch.getEntryOrder("vy");
+    vz_order  = sch.getEntryOrder("vz");
+    ch_order  = sch.getEntryOrder("charge");
+    st_order  = sch.getEntryOrder("status");
+    
+  }
 
+  
 }
