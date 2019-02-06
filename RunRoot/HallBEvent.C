@@ -78,12 +78,7 @@ void HallBEvent(){
  
      //  while(reader.next()==true){// (map 4.5s for 1M events)
                              
-     while(event.next()==true){ //(5.6s) vector + all loop (7.6s)
-       //  7M =75.05 seconds Cpu Time =  48.65s
-       //(7.2s) map  + all loop (9.4s)
-       //(6.9s) uomap+ all loop (8.7s)
-       //7M =  85.74 seconds Cpu Time =  59.70s
-       //i.e. using maps is 2.5x slower!
+     while(event.next()==true){ !
 
         event.head()->getStartTime();
      
