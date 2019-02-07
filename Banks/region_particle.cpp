@@ -20,30 +20,33 @@ namespace clas12 {
   {
     
   }
-  region_particle::region_particle(par_ptr pars,covmat_ptr cm, scint_ptr scp, trck_ptr trp):
+  region_particle::region_particle(par_ptr pars,covmat_ptr cm, scint_ptr scp, trck_ptr trp, traj_ptr trj):
     _parts(pars),
     _covmat(cm),
     _scint(scp),
-    _trck(trp)
+    _trck(trp),
+    _traj(trj)
   {
     
   }
-  region_particle::region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, cher_ptr chp):
+  region_particle::region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp):
     _parts(pars),
     _covmat(cm),
     _cal(calp),
     _scint(scp),
     _trck(trp),
+    _traj(trj),
     _cher(chp)
   {
     
   }
-  region_particle::region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, cher_ptr chp, ft_ptr ftp):
+  region_particle::region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp):
     _parts(pars),
     _covmat(cm),
     _cal(calp),
     _scint(scp),
     _trck(trp),
+    _traj(trj),
     _cher(chp),
     _ft(ftp)
   {

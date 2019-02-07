@@ -32,7 +32,7 @@ namespace clas12 {
   void  covmatrix::scanIndex(){
     // _rmap.clear();
    _rvec.clear();
-    const int size = getSize();
+    const int size = getRows();
     _rvec.reserve(size);
     for(int i = 0; i < size; i++){
      int pindex   = getPindex(i);

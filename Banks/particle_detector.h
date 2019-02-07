@@ -88,7 +88,7 @@ namespace clas12 {
     int  _pindex_order=-1;
     int _index=-1;
     
-    // std::unordered_map<int,int> _rmap;
+    // std::map<int,int> _rmap;
     std::vector<int> _rvec;
     std::vector<std::string > _sitems;
 

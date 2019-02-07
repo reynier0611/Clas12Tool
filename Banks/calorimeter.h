@@ -32,104 +32,104 @@ namespace clas12 {
  
     virtual ~calorimeter()=default;
     
-    int getLayer(int index) override{ 
+    int getLayer(int index) override{
       if(index>-1)return getInt(_layer_order,index);
       return 0;
     }
    //getter funtions for items in calorimeter bank
-    double getTime(){ 
+    double getTime(){
       if(_index>-1)return getFloat(_time_order,_index);
       return 0;
     }
-    double getEnergy(){ 
+    double getEnergy(){
       if(_index>-1)return getFloat(_energy_order,_index);
       return 0;
     }
-    double getPath(){ 
+    double getPath(){
       if(_index>-1)return getFloat(_path_order,_index);
       return 0;
     }
-    int getLayer() override{ 
+    int getLayer() override{
       if(_index>-1)return getInt(_layer_order,_index);
       return 0;
     }
-   int getSector(){ 
+   int getSector(){
       if(_index>-1)return getInt(_sector_order,_index);
       return 0;
     }
-    double getX(){ 
+    double getX(){
       if(_index>-1)return getFloat(_x_order,_index);
       return 0;
     }
-    double getY(){ 
+    double getY(){
       if(_index>-1)return getFloat(_y_order,_index);
       return 0;
     }
-    double getZ(){ 
+    double getZ(){
       if(_index>-1)return getFloat(_z_order,_index);
       return 0;
     }
-    double getDu(){ 
+    double getDu(){
       if(_index>-1)return getFloat(_du_order,_index);
       return 0;
     }
-    double getDv(){ 
+    double getDv(){
       if(_index>-1)return getFloat(_dv_order,_index);
       return 0;
     }
-    double getDw(){ 
+    double getDw(){
       if(_index>-1)return getFloat(_dw_order,_index);
       return 0;
     }
-    double getHx(){ 
+    double getHx(){
       if(_index>-1)return getFloat(_hx_order,_index);
       return 0;
     }
-    double getHy(){ 
+    double getHy(){
       if(_index>-1)return getFloat(_hy_order,_index);
       return 0;
     }
-    double getHz(){ 
+    double getHz(){
       if(_index>-1)return getFloat(_hz_order,_index);
       return 0;
     }
-    double getLu(){ 
+    double getLu(){
       if(_index>-1)return getFloat(_lu_order,_index);
       return 0;
     }
-    double getLv(){ 
+    double getLv(){
       if(_index>-1)return getFloat(_lv_order,_index);
       return 0;
     }
-    double getLw(){ 
+    double getLw(){
       if(_index>-1)return getFloat(_lw_order,_index);
       return 0;
     }
-    double getM2u(){ 
+    double getM2u(){
       if(_index>-1)return getFloat(_m2u_order,_index);
       return 0;
     }
-    double getM2v(){ 
+    double getM2v(){
       if(_index>-1)return getFloat(_m2v_order,_index);
       return 0;
     }
-    double getM2w(){ 
+    double getM2w(){
       if(_index>-1)return getFloat(_m2w_order,_index);
       return 0;
     }
-    double getM3u(){ 
+    double getM3u(){
       if(_index>-1)return getFloat(_m3u_order,_index);
       return 0;
     }
-    double getM3v(){ 
+    double getM3v(){
       if(_index>-1)return getFloat(_m3v_order,_index);
       return 0;
     }
-    double getM3w(){ 
+    double getM3w(){
       if(_index>-1)return getFloat(_m3w_order,_index);
       return 0;
     }
-    int getStatus(){ 
+    int getStatus(){
       if(_index>-1)return getInt(_status_order,_index);
       return 0;
     }

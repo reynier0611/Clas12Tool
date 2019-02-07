@@ -33,8 +33,8 @@ namespace clas12 {
       return true;
     return false;
   }
-  ////////////////////////////////////////////////////////////////////////
-  ///function to map the detector entry to particle index
+  
+  //  function to map the detector entry to particle index
   // void   particle_detector::scanIndex(){
   //   _rmap.clear();
     
@@ -76,7 +76,7 @@ namespace clas12 {
   }
 
 
- int particle_detector::getIndex(int pindex, int detector, int layer){
+  int particle_detector::getIndex(int pindex, int detector, int layer){
  
     std::vector<int>::iterator it;
      int key = (detector<<16)|(layer<<8)|pindex;
@@ -88,17 +88,17 @@ namespace clas12 {
   }
    void  particle_detector::scanIndex(){
   
-   _rvec.clear();
-    const int size = getSize();
-    _rvec.reserve(size);
-    for(int i = 0; i < size; i++){
-      int detector = getDetector(i);
-      int layer= getLayer(i);
-      int pindex   = getPindex(i);
-      int key = (detector<<16)|(layer<<8)|pindex;
-      _rvec.emplace_back(key);
-    }
+     _rvec.clear();
+     const int size = getRows();
+     _rvec.reserve(size);
+     for(int i = 0; i < size; i++){
+        int detector = getDetector(i);
+       int layer= getLayer(i);
+       int pindex   = getPindex(i);
+       int key = (detector<<16)|(layer<<8)|pindex;
+       _rvec.emplace_back(key);
+     }
    }
-
+  
 }
   

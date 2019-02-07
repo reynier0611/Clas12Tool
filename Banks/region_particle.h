@@ -20,6 +20,7 @@
 #include "calorimeter.h"
 #include "scintillator.h"
 #include "tracker.h"
+#include "traj.h"
 #include "cherenkov.h"
 #include "forwardtagger.h"
 
@@ -33,17 +34,17 @@ namespace clas12 {
 
 
     region_particle(par_ptr pars,covmat_ptr cm);
-   //For region_ft
+    //For region_ft
     region_particle(par_ptr pars,covmat_ptr cm, ft_ptr ftp);
     //For region_cdet
     region_particle(par_ptr pars,covmat_ptr cm,
-		    scint_ptr scp, trck_ptr trp);
-     //For region_fdet
+		    scint_ptr scp, trck_ptr trp, traj_ptr trj);
+    //For region_fdet
     region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp,
-		    scint_ptr scp, trck_ptr trp, cher_ptr chp);
+		    scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp);
     //For all regions
     region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp,
-		    scint_ptr scp, trck_ptr trp, cher_ptr chp, ft_ptr ftp);
+		    scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp);
 
     virtual ~region_particle()=default;
 
@@ -70,6 +71,7 @@ namespace clas12 {
     virtual const cal_ptr cal(ushort lay) const{_cal->setIndex(-1);return _cal;};
     virtual const scint_ptr sci(ushort lay) const{_scint->setIndex(-1);return _scint;};
     virtual const trck_ptr trk(ushort lay) const{_trck->setIndex(-1);return _trck;};
+    virtual const traj_ptr traj(ushort det) const{_traj->setIndex(-1);return _traj;};
     virtual const cher_ptr che(ushort lay) const{_cher->setIndex(-1);return _cher;};
     virtual const ft_ptr ft(ushort lay) const{_ft->setIndex(-1);return _ft;};
 
@@ -87,6 +89,7 @@ namespace clas12 {
     cal_ptr  _cal;
     scint_ptr _scint;
     trck_ptr _trck;
+    traj_ptr _traj;
     cher_ptr _cher;
  
     
