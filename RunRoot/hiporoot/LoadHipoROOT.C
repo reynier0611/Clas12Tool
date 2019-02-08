@@ -3,6 +3,8 @@
 #include <TInterpreter.h>
 #include <TROOT.h>
 
+namespace hiporoot{}
+using namespace hiporoot;
 
 void LoadHipoROOT(){
 
