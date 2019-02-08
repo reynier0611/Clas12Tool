@@ -41,7 +41,6 @@ namespace clas12 {
 
     particle() = default;
     
- ;
     
     particle(hipo::dictionary __factory);
     particle(hipo::schema __schema);

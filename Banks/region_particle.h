@@ -32,7 +32,8 @@ namespace clas12 {
 
   public:
 
-
+    region_particle(){};
+    
     region_particle(par_ptr pars,covmat_ptr cm);
     //For region_ft
     region_particle(par_ptr pars,covmat_ptr cm, ft_ptr ftp);

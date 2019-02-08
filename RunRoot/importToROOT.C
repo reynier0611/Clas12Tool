@@ -47,9 +47,9 @@
   gROOT->LoadMacro("$CLAS12TOOL/Banks/region_fdet.cpp+");
   gROOT->LoadMacro("$CLAS12TOOL/Banks/region_cdet.cpp+");
   gROOT->LoadMacro("$CLAS12TOOL/Banks/clas12reader.cpp+");
-  gROOT->LoadMacro("$CLAS12TOOL/Banks/bankreader.cpp+");
+  //  gROOT->LoadMacro("$CLAS12TOOL/Banks/bankreader.cpp+");
   //gROOT->LoadMacro("$CLAS12TOOL/Banks/hallB_event.cpp+");
-  gROOT->LoadMacro("$CLAS12TOOL/RunRoot/ParticleHisto.C+");
+  // gROOT->LoadMacro("$CLAS12TOOL/RunRoot/ParticleHisto.C+");
  
 
 }

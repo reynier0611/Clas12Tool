@@ -70,6 +70,7 @@ namespace clas12 {
     
     
     std::vector<region_part_ptr>& getDetParticles(){return _detParticles;}
+    std::vector<region_part_ptr>* getDetParticlesPtr(){return &_detParticles;}
     std::vector<region_part_ptr> getByID(int id);
 
     int getNParticles() const {return _detParticles.size();}
