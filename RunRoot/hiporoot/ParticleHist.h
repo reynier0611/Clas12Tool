@@ -18,14 +18,19 @@ namespace hiporoot {
 
 
     void Loop() final;
-    TString ExpandVars(TString varExp0,TString seperator) final;
+    TString ExpandVars(TString varExp0,TString seperator);
     TString ExpandPart(TString exp);
-    TString RemoveArithmetic(TString& expr);
+    TString ExpandExpression(TString varExp0,TString seperator) final;
+    TString ExpandParenthesis(TString varExp0,TString seperator);
+    
+    vector<TString> RemoveArithmetic(TString& expr);
     
     using c12_uptr = std::unique_ptr<clas12::clas12reader>;
     
-    c12_uptr clas12(){return std::move(c12_uptr
-				       (new clas12::clas12reader(HipoFileName().Data())));}
+    c12_uptr clas12(){
+      return std::move(c12_uptr
+		       (new clas12::clas12reader(HipoFileName().Data())));
+    }
     
   private :
  

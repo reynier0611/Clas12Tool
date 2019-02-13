@@ -79,8 +79,10 @@ namespace clas12 {
     const CovMatrix* cmat() const{_covmat->setIndex(_pcmat);return _covmat->matrix();};
  
     
-    short region() const {return _region;}
-
+    short getRegion() const {return _region;}
+    float getTheta() const;
+    float getPhi() const;
+    float getP(){_parts->setEntry(_pentry);return _parts->getP();}
     
   protected:
 

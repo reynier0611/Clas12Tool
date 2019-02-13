@@ -24,7 +24,7 @@ namespace hiporoot{
    }
 
 
-  void HipoROOTOut::AddAction(TString varExp){
+  void HipoROOTOut::AddAction(TString varExp,TString condExp){
     if(_curMacro==TString("")){
       TString HIPOROOT=TString(gSystem->Getenv("CLAS12TOOL"))+"/RunRoot/hiporoot/";
       TMacro macro(HIPOROOT+"template"+_tempActionName+".C");
@@ -44,6 +44,8 @@ namespace hiporoot{
     strline.ReplaceAll("////","");
     strline.ReplaceAll("XXXX",varExp);
     strline.ReplaceAll("(IIII)",Form("(%d)",_Nactions++));
+    strline.ReplaceAll("CCCC",condExp);
+    
     TList *lines=macro.GetListOfLines();
     TObject* obj=macro.GetLineWith("XXXX");
     lines->AddAfter(obj,new TObjString(strline.Data()));

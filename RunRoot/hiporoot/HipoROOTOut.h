@@ -13,10 +13,11 @@ namespace hiporoot {
     HipoROOTOut(TString filename);
     virtual ~HipoROOTOut();
     
-    void AddAction(TString varExp);
+    void AddAction(TString varExp,TString condExp="1");
     void CompileAction();
     void CleanAction();
-    virtual TString ExpandVars(TString varExp0,TString seperator){return varExp0;};    
+    //  virtual TString ExpandVars(TString varExp0,TString seperator){return varExp0;};    
+    virtual TString ExpandExpression(TString varExp0,TString seperator){return varExp0;};    
     virtual void Loop()=0;
     
     //  virtual Double_t Action()=0;

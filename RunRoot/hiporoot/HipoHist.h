@@ -18,9 +18,9 @@ namespace hiporoot {
 
 
  
-    HipoHist* Hist1D(TString varExp,Int_t nbins,Float_t min,Float_t max,TString condExp="");
+    HipoHist* Hist1D(TString varExp,Int_t nbins,Float_t min,Float_t max,TString condExp="1");
     HipoHist* Hist2D(TString varExp,Int_t nbinsX,Float_t minX,Float_t maxX,
-		     Int_t nbinsY,Float_t minY,Float_t maxY,TString condExp="");
+		     Int_t nbinsY,Float_t minY,Float_t maxY,TString condExp="1");
 
     void Draw(const TString opt="");
     void OnCanvas(const TString opt);
