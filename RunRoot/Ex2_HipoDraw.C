@@ -1,6 +1,6 @@
 {
 
-  //ParticleHist hists("/home/dglazier/fastdata/hipo4test/filtered/clas_004152.recon.hipo");
+  ParticleHist hists("/home/dglazier/fastdata/hipo4test/filtered/clas_004152.recon.hipo");
   //OR using a chain
   //Particle hists("");
   //hists.GetChain()->Add("file1.hipo")

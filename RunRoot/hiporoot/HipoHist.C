@@ -53,15 +53,12 @@ namespace hiporoot {
   
   void HipoHist::OnCanvas(TString opt){
 
-    cout<<opt<<endl;
     Int_t left=-1;
     Int_t Npads=0;
     Int_t nx,ny=0;
     if((left=opt.First("("))!=-1){
       left++;
-      cout<<"left "<<left<<endl;
       Int_t right=opt.First(")");
-      cout<<"right"<<right<<endl;
       if(right==-1) cout<<"HipoHist::OnCanvas mismatched () "<<opt<<endl;
       TString dims=opt(left,right-left);
       cout<<dims<<endl;
@@ -75,11 +72,9 @@ namespace hiporoot {
 	canvas->Divide(nx,ny);
 	Npads=nx*ny;
       }
-      cout<<"pads "<<Npads<<endl;
       //remove split option
       left--;
       TString splitopt=opt(left,right-left+1);
-      cout<<splitopt<<endl;
       opt.ReplaceAll(splitopt,"");
     }
     //Simple 1 hist on 1 canvas
