@@ -18,7 +18,6 @@ namespace hiporoot {
     varExp=ExpandExpression(varExp,",");
     if(condExp==TString(""))condExp="1";
     if(condExp!=TString("1")) condExp=ExpandExpression(condExp,"");
-    cout<<"HIST!D "<<varExp<<" "<<varExp.Data()<<" "<<varExp.Sizeof()<<endl;
     AddAction(varExp,condExp);
     auto hist=new TH1F(varExp,varExp,nbins,min,max);
     _histList->Add(hist);
@@ -37,7 +36,7 @@ namespace hiporoot {
     return this;
   }
   
-  void HipoHist::Draw(const TString opt){
+  void HipoHist::Draw(TString opt){
     gBenchmark->Reset();
     gBenchmark->Start("compile time");
     CompileAction();
@@ -52,19 +51,67 @@ namespace hiporoot {
     _curHist.clear();
   }
   
-  void HipoHist::OnCanvas(const TString opt){
+  void HipoHist::OnCanvas(TString opt){
 
+    cout<<opt<<endl;
+    Int_t left=-1;
+    Int_t Npads=0;
+    Int_t nx,ny=0;
+    if((left=opt.First("("))!=-1){
+      left++;
+      cout<<"left "<<left<<endl;
+      Int_t right=opt.First(")");
+      cout<<"right"<<right<<endl;
+      if(right==-1) cout<<"HipoHist::OnCanvas mismatched () "<<opt<<endl;
+      TString dims=opt(left,right-left);
+      cout<<dims<<endl;
+      auto xandy=dims.Tokenize("x");
+      if(xandy->GetEntries()<2)
+	xandy=dims.Tokenize("X");
+      if(xandy->GetEntries()>1){
+	nx=TString(xandy->At(0)->GetName()).Atoi();
+	ny=TString(xandy->At(1)->GetName()).Atoi();
+	TCanvas* canvas=new TCanvas();
+	canvas->Divide(nx,ny);
+	Npads=nx*ny;
+      }
+      cout<<"pads "<<Npads<<endl;
+      //remove split option
+      left--;
+      TString splitopt=opt(left,right-left+1);
+      cout<<splitopt<<endl;
+      opt.ReplaceAll(splitopt,"");
+    }
+    //Simple 1 hist on 1 canvas
     if(_curHist.size()==1){
       if(!gPad) new TCanvas();
       _curHist[0]->DrawCopy(opt);
       return;	
     }
-      
-    for(auto* hist : _curHist){
-      if(!opt.Contains("same")){
-	new TCanvas();
+    if(!Npads){
+      //Simple many hists on many canvas
+      for(auto* hist : _curHist){
+	if(!opt.Contains("same")){
+	  new TCanvas();
+	}
+	hist->DrawCopy(opt);
       }
-      hist->DrawCopy(opt);
+    }
+    else{
+      //Use use divided canvas for many hists
+      Int_t ipad=1;
+      auto* canvas=dynamic_cast<TCanvas*>(gPad);
+      Int_t Ncan=0;
+      for(auto* hist : _curHist){
+	if(ipad>Npads){
+	  canvas=new TCanvas();
+	  canvas->Divide(nx,ny);
+	  canvas->Draw();
+	  ipad=1;
+	}
+	canvas->cd(ipad++);
+	hist->DrawCopy(opt);
+      }
     }
   }
   void HipoHist::Save(const TString outname){

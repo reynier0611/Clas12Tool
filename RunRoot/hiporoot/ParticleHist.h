@@ -12,7 +12,6 @@ namespace hiporoot {
 
 
   public :
-    ParticleHist()=default;
     ParticleHist(TString filename);
     virtual ~ParticleHist();
 
@@ -22,6 +21,7 @@ namespace hiporoot {
     TString ExpandPart(TString exp);
     TString ExpandExpression(TString varExp0,TString seperator) final;
     TString ExpandParenthesis(TString varExp0,TString seperator);
+    TString AddParenthesis(TString varExp0);
     
     vector<TString> RemoveArithmetic(TString& expr);
     

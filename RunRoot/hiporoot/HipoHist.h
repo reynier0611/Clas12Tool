@@ -22,8 +22,8 @@ namespace hiporoot {
     HipoHist* Hist2D(TString varExp,Int_t nbinsX,Float_t minX,Float_t maxX,
 		     Int_t nbinsY,Float_t minY,Float_t maxY,TString condExp="1");
 
-    void Draw(const TString opt="");
-    void OnCanvas(const TString opt);
+    void Draw(TString opt="");
+    void OnCanvas(TString opt);
     void Save(const TString outname);
     std::vector<TH1* >* Hists(){return &_curHist;}
   protected :

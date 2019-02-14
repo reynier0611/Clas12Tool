@@ -9,6 +9,7 @@
 namespace clas12 {
 
   clas12reader::clas12reader(string filename){
+    cout<<" clas12reader::clas12reader reading "<<filename.data()<<endl;
     _reader.open(filename.data()); //keep a pointer to the reader
 
     hipo::dictionary  factory;

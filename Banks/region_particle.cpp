@@ -41,7 +41,7 @@ namespace clas12 {
   {
     
   }
-  region_particle::region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp):
+  region_particle::region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,head_ptr head):
     _parts(pars),
     _covmat(cm),
     _cal(calp),
@@ -49,7 +49,8 @@ namespace clas12 {
     _trck(trp),
     _traj(trj),
     _cher(chp),
-    _ft(ftp)
+    _ft(ftp),
+    _head(head)
   {
     
   }
@@ -67,6 +68,17 @@ namespace clas12 {
     float x=_parts->getPx();
     float y=_parts->getPy();
     return atan2(y,x);
+  }
+  float region_particle::getCalcMass() {
+    float p=getP();
+    float t=getTime()-_head->getStartTime();
+    float d=getPath();
+    if(t==0)
+      return 0;
+    if(p==0)
+      return 0;
+    float mass= d/t/p*2.9979246e+08/1E9;
+    return mass;
   }
 
 }

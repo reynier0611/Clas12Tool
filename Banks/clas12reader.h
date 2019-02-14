@@ -52,16 +52,16 @@ namespace clas12 {
     void addARegionFDet(){
       //Forward detector needs particles, calorimeter, scintillator,
       //track, cherenkov
-      _rfdets.push_back(std::make_shared<region_fdet>(_bparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft));
+      _rfdets.push_back(std::make_shared<region_fdet>(_bparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft,_bhead));
     }
      void addARegionCDet(){
       //Forward detector needs particles, calorimeter, scintillator,
       //track, cherenkov
-      _rcdets.push_back(std::make_shared<region_cdet>(_bparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft));
+       _rcdets.push_back(std::make_shared<region_cdet>(_bparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft,_bhead));
     }
     void addARegionFT(){
       //Forward tagger needs particles and forward tagger
-      _rfts.push_back(std::make_shared<region_ft>(_bparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft));
+      _rfts.push_back(std::make_shared<region_ft>(_bparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft,_bhead));
     }
 
 

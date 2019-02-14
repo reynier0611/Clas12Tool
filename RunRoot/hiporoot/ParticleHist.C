@@ -32,9 +32,10 @@ namespace hiporoot {
 
     //Trackers
     _mapOfParts["DC"]="p->trk(DC)->";
+    _mapOfParts["CVT"]="p->trk(CVT)->";
 
     //Particles
-    _mapOfParts["PREC"]="p->par()->";
+    _mapOfParts["PBANK"]="p->par()->";
 
     //Particle Region
     _mapOfParts["P"]="p->";
@@ -46,15 +47,16 @@ namespace hiporoot {
   ParticleHist::~ParticleHist(){
     }
   void ParticleHist::Loop(){
-    //_c12.reset(new clas12reader(HipoFileName().Data()));
-    cout<<"LOOP "<<gHipoRootAction.get()<<endl;
-    gHipoRootAction->Action(this);
+    while(IsMoreFiles())
+      gHipoRootAction->Action(this);
     
   }
   TString ParticleHist::ExpandExpression(TString varExp0,TString seperator){
     varExp0.ReplaceAll(" ","");
     varExp0.ReplaceAll("::","@@");
     varExp0.ReplaceAll("()","{}");
+    varExp0=AddParenthesis(varExp0);
+    
     auto exps = varExp0.Tokenize(":");
     auto Nexp = exps->GetEntries();
     TString varExp1;
@@ -72,7 +74,7 @@ namespace hiporoot {
   
   TString ParticleHist::ExpandVars(TString varExp0,TString seperator){
   
-    cout<<"TString ParticleHist::ExpandVars "<<varExp0<<endl;
+    // cout<<"TString ParticleHist::ExpandVars "<<varExp0<<endl;
   
       
     TString varExp1;
@@ -82,7 +84,6 @@ namespace hiporoot {
     auto plusses = exp.Tokenize("#");//+-/* replaced with |
     Int_t Npl=plusses->GetEntries();
     if(Npl){
-      cout<<Npl<<"  "<<plusses->At(0)->GetName()<<endl;
       Int_t ns=0;
       if(exp[0]=='#') varExp1+=symbols[ns++];//e.g. negative
       
@@ -99,7 +100,7 @@ namespace hiporoot {
   }
   ///////////////////NEED TO FIX FOR FTOF1B.Path<700 conditions
   TString ParticleHist::ExpandPart(TString exp){
-    cout<<" :ExpandPart "<<exp<<endl;
+    // cout<<" :ExpandPart "<<exp<<endl;
     if(exp.IsFloat()) return exp;
     exp.ReplaceAll(" ","");
     if(exp.Sizeof()==3&&exp[0]=='F'&&exp[1]=='T') return exp;
@@ -117,7 +118,7 @@ namespace hiporoot {
   vector<TString> ParticleHist::RemoveArithmetic(TString& expr){
     vector<TString> symbols;
     
-    const vector<char> operators1={'+','-','/','*','>','<'};
+    const vector<char> operators1={'+','-','/','*','>','<','!'};
     const vector<TString> operators2={"==","!=",">=","<=","&&","||"};
     for(Int_t i=0;i<expr.Sizeof();i++){
       Bool_t got2=kFALSE;
@@ -141,14 +142,13 @@ namespace hiporoot {
     return symbols;
   }
   TString ParticleHist::ExpandParenthesis(TString varExp0,TString seperator){
-    cout<<"ParticleHist::ExpandParenthesis "<<varExp0<<endl;
+    // cout<<"ParticleHist::ExpandParenthesis "<<varExp0<<endl;
     Int_t first = varExp0.First('(');
     TString varExp1;
     
     if(first==-1){
       varExp1=varExp0; //no brackets
       varExp1=ExpandVars(varExp1,seperator);
-      // varExp1=Form("(%s)",varExp1.Data());
       return varExp1;
    }
    else {  //expand parenthesis
@@ -172,7 +172,6 @@ namespace hiporoot {
 	    nc++;
 	  }
 	  else{
-	    cout<<"COMINF+G FRO CAOMMA "<<endl;
 	    second=i;
 	    varExp1+=Form("%s",ExpandParenthesis(varExp0(first+1,second-first-1),seperator).Data());
 	    first=i;
@@ -183,12 +182,8 @@ namespace hiporoot {
 	  }
 	}
 	else if(first==-1) varExp1+=varExp0[i];//just copy text if betweeh parenthesis
-	//varExp1+=varExp0[i];//just copy text if betweeh parenthesis
-	
-	//cout<<nb<<" "<<first<<" "<<i<<endl;
 	if(nb==0&&first!=-1){
 	  second=i;
-	  cout<<"COMINF+G FRO B "<< endl;
 	  if(nc==0) varExp1+=Form("%s)",ExpandParenthesis(varExp0(first+1,second-first-1),seperator).Data());
 	  else  varExp1+=Form("%s)",ExpandParenthesis(varExp0(first+1,second-first-1),seperator).Data());
 	  first=-1;
@@ -196,14 +191,56 @@ namespace hiporoot {
 	}
       }
     }
-    first = varExp0.First('(');
-    if(first ==-1) //no brackets
-      varExp1=Form("%s",varExp1.Data());
-    else
-      varExp1=Form("%s",varExp1.Data());
+    varExp1=Form("%s",varExp1.Data());
      
-    cout<< "EXPANDED EXPRESSION PARENTHESIS"<<varExp1.Data()<<" "<<varExp1.Sizeof()<<endl;
+    //   cout<< "EXPANDED EXPRESSION PARENTHESIS"<<varExp1.Data()<<" "<<varExp1.Sizeof()<<endl;
     return varExp1;
   }
-  
+
+  TString ParticleHist::AddParenthesis(TString varExp0){ //surround XXX.YYY with ( )
+    if(!varExp0.Contains('.')) return varExp0;
+    TString varExp1=varExp0;
+    const Int_t Nc=varExp0.Sizeof();
+    TString alpha;
+    for (Int_t i=0;i<Nc-1;i++){
+       if(varExp0[i]=='.'){
+	if(i==0) continue;
+	Int_t iright=0;
+	Int_t ileft=0;
+	Int_t ia=i+1;
+	alpha=varExp0[ia];
+	while(alpha.IsAlnum()&&ia<Nc){
+	  ia++;
+	  alpha=varExp0[ia];
+	}
+	if(ia!=i+1){
+	  iright=ia;
+	  if(varExp0[iright]==')') //check if already got )
+	    iright=0;
+	}
+	ia=i-1;
+	alpha=varExp0[ia];
+	while(alpha.IsAlnum()&&ia>0){
+	  ia--;
+	  alpha=varExp0[ia];
+	}
+	if(ia!=i-1){
+	  // if(ia==i-2)ileft=ia+1;
+ileft=ia+1;	  // else ileft=ia;
+	  if(ileft-1>=0)
+	    if(varExp0[ileft-1]=='(') //check if already got )
+	      iright=0;
+	}
+	  
+	if(iright!=i+1&&iright!=0){
+	  if(ileft==1) ileft=0;
+	  TString expr=varExp0(ileft,iright-ileft);
+	  varExp1.ReplaceAll(expr.Data(),Form("(%s)",expr.Data()));
+	  i++;
+	}
+      }
+    }
+    return varExp1;
+      
+  }
 }

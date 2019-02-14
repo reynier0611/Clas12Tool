@@ -13,7 +13,6 @@ namespace clas12 {
   particle::particle(hipo::dictionary __factory): hipo::bank(__factory.getSchema("REC::Particle")) {
  
     auto sch=getSchema();
-    sch.show();
     pid_order = sch.getEntryOrder("pid");
     px_order  = sch.getEntryOrder("px");
     py_order  = sch.getEntryOrder("py");
@@ -29,7 +28,6 @@ namespace clas12 {
   particle::particle(hipo::schema __schema): hipo::bank(__schema) {
  
     auto sch=getSchema();
-    sch.show();
     pid_order = sch.getEntryOrder("pid");
     px_order  = sch.getEntryOrder("px");
     py_order  = sch.getEntryOrder("py");

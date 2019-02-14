@@ -21,6 +21,7 @@
 #include "scintillator.h"
 #include "tracker.h"
 #include "traj.h"
+#include "header.h"
 #include "cherenkov.h"
 #include "forwardtagger.h"
 
@@ -45,7 +46,7 @@ namespace clas12 {
 		    scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp);
     //For all regions
     region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp,
-		    scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp);
+		    scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,head_ptr head);
 
     virtual ~region_particle()=default;
 
@@ -67,6 +68,7 @@ namespace clas12 {
     virtual double getDeltaEnergy()=0;
     virtual short getSector() =0;
 
+    const head_ptr head() const{return _head;};
     const par_ptr par() const{_parts->setEntry(_pentry);return _parts;};
     const covmat_ptr covmat() const{_covmat->setIndex(_pcmat);return _covmat;};
     virtual const cal_ptr cal(ushort lay) const{_cal->setIndex(-1);return _cal;};
@@ -83,7 +85,7 @@ namespace clas12 {
     float getTheta() const;
     float getPhi() const;
     float getP(){_parts->setEntry(_pentry);return _parts->getP();}
-    
+    float getCalcMass();
   protected:
 
     par_ptr _parts;
@@ -94,6 +96,7 @@ namespace clas12 {
     trck_ptr _trck;
     traj_ptr _traj;
     cher_ptr _cher;
+    head_ptr _head;
  
     
     //particle index

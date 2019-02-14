@@ -22,8 +22,22 @@ namespace hiporoot{
   HipoROOTOut::~HipoROOTOut(){
     gSystem->Exec(Form("rm %sasdf*",_tempDir.Data()));
    }
-
-
+  TString HipoROOTOut::NextFile(){
+    if(_iHipoFile==0&&_chain.GetListOfFiles()->GetEntries()==0)
+      _chain.Add(_hipoFileName);
+    if(_iHipoFile>=_chain.GetListOfFiles()->GetEntries())
+      return TString();
+    TString fname=_chain.GetListOfFiles()->At(_iHipoFile)->GetTitle();
+    _iHipoFile++;
+    return fname;
+  }
+  Bool_t HipoROOTOut::IsMoreFiles(){
+    if(_iHipoFile==0&&_chain.GetListOfFiles()->GetEntries()==0)
+      _chain.Add(_hipoFileName);
+    if(_iHipoFile>=_chain.GetListOfFiles()->GetEntries())
+      return kFALSE;
+    return kTRUE;
+  }
   void HipoROOTOut::AddAction(TString varExp,TString condExp){
     if(_curMacro==TString("")){
       TString HIPOROOT=TString(gSystem->Getenv("CLAS12TOOL"))+"/RunRoot/hiporoot/";
@@ -64,6 +78,7 @@ namespace hiporoot{
   }
   
    void HipoROOTOut::CleanAction(){
+     _iHipoFile=0;
      if(_curMacro!=TString("")){
        _curMacro="";
        _Nactions=0;

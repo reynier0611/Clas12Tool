@@ -18,8 +18,7 @@ namespace hiporoot{
       auto phist=dynamic_cast<ParticleHist*>(hiprout);
 
       auto hists=phist->Hists();
-      //      auto c12= phist->clas12().get();
-      clas12::clas12reader c12(phist->HipoFileName().Data());
+      clas12::clas12reader c12(phist->NextFile().Data());
       std::vector<region_part_ptr>* particles=c12.getDetParticlesPtr();
 
       while(c12.next()==true){

@@ -3,6 +3,7 @@
 
 #include "region_particle.h"
 #include <TString.h>
+#include <TChain.h>
 
 namespace hiporoot {
   
@@ -24,7 +25,10 @@ namespace hiporoot {
     virtual Bool_t Condition(){return kTRUE;}
 
     TString HipoFileName(){return _hipoFileName;}
-
+    TString NextFile();
+    Bool_t IsMoreFiles();
+    TChain* GetChain(){return &_chain;}
+    
   protected :
     
     TString _tempActionName;
@@ -37,7 +41,9 @@ namespace hiporoot {
     TString _tempDir="~/.hiporoot";
     Int_t _Nactions=0;
     Int_t _Nruns=0;
-
+    TChain _chain;
+    Int_t _iHipoFile=0;
+    
   };//class HipoROOTOut
   
 }
