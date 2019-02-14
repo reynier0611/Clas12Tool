@@ -36,7 +36,7 @@ Examples :
 
    ph.Hist1D("FTOF1B.Time-FTOF2.Time",1000,-500,500)->Draw("hist")
 
-   ph.Hist1D("PREC.Px*PREC.Px+PREC.Py*PREC.Py+PREC.Pz*PREC.Pz",1000,0,5)->Draw()
+   ph.Hist1D("PBANK.Px * PBANK.Px + PBANK.Py * PBANK.Py + PBANK.Pz * PBANK.Pz",1000,0,5)->Draw()
 
 
    ph.Hist1D("CND1.Time",1000,1,500)->Draw()
@@ -52,7 +52,7 @@ Or Lazy execution
 
 With conditions
 
-   ph.Hist2D("P.Time-EVNT.StartTime:PREC.P",100,-20,20,100,0,10,"P.Region==FT&&FTCAL.Time")->Draw("col1")
+   ph.Hist2D("P.Time-EVNT.StartTime:PBANK.P",100,-20,20,100,0,10,"P.Region==FT&&FTCAL.Time")->Draw("col1")
 
    note P.Region = FT,FD,CD
 
