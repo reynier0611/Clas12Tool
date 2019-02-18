@@ -29,7 +29,7 @@ HipoRoot::Draw
 
 alias hipodraw root -l  $CLAS12TOOL/RunRoot/hiporoot/LoadHipoROOT.C
 
-hipodraw
+hipodraw   (or >  hipodraw Ex2_HipoDraw.C)
 
 root [0] 
 
