@@ -47,6 +47,7 @@ void ReadEvents(){
    auto PART8_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::Cherenkov"));
    auto PART9_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::ForwardTagger"));
    gBenchmark->Start("timer");
+   TH1F* hist=new TH1F("hist","hist",1000,-0.5,0.5);
    while(reader.next()==true){
       reader.read(event);
       //reader.next();
@@ -75,14 +76,15 @@ void ReadEvents(){
   //PART.show();
       int nrows = PART_ptr->getRows();
       for(int i = 0; i < nrows; i++){
-	float  pz = PART_ptr->getFloat("pz",i);
-	if(pz==0) counter++;
+	float  px = PART_ptr->getFloat("px",i);
+	if(px)hist->Fill(px);
+	counter++;
       }
       //     counter++;
    }
    printf("processed events = %d\n",counter);
    gBenchmark->Stop("timer");
    gBenchmark->Print("timer");
-
+   hist->DrawCopy();
 
 }

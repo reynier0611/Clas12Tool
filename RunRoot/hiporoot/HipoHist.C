@@ -39,6 +39,7 @@ namespace hiporoot {
   void HipoHist::Draw(TString opt){
     gBenchmark->Reset();
     gBenchmark->Start("compile time");
+    PreCompileAction();
     CompileAction();
     gBenchmark->Stop("compile time");
     gBenchmark->Print("compile time");
@@ -55,13 +56,13 @@ namespace hiporoot {
 
     Int_t left=-1;
     Int_t Npads=0;
-    Int_t nx,ny=0;
+    Int_t nx=0;
+    Int_t ny=0;
     if((left=opt.First("("))!=-1){
       left++;
       Int_t right=opt.First(")");
       if(right==-1) cout<<"HipoHist::OnCanvas mismatched () "<<opt<<endl;
       TString dims=opt(left,right-left);
-      cout<<dims<<endl;
       auto xandy=dims.Tokenize("x");
       if(xandy->GetEntries()<2)
 	xandy=dims.Tokenize("X");
@@ -114,4 +115,5 @@ namespace hiporoot {
     outfile->WriteTObject(_histList);
     delete outfile;
   }
+  
 }

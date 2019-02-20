@@ -19,6 +19,7 @@ void LoadHipoROOT(){
   gROOT->LoadMacro(HIPOROOT+"HipoRootAction.C+");
   gROOT->LoadMacro(HIPOROOT+"HipoHist.C+");
   gROOT->LoadMacro(HIPOROOT+"ParticleHist.C+");
+  gROOT->LoadMacro(HIPOROOT+"BankHist.C+");
 
 
 

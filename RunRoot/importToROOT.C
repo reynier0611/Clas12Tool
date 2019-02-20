@@ -32,6 +32,8 @@
   gSystem->AddIncludePath(TString("-I")+gSystem->Getenv("CLAS12TOOL")+"/Banks");
   gROOT->LoadMacro("$CLAS12TOOL/Banks/vectors.cpp+");
   gROOT->LoadMacro("$CLAS12TOOL/Banks/header.cpp+");
+  gROOT->LoadMacro("$CLAS12TOOL/Banks/vtp.cpp+");
+  gROOT->LoadMacro("$CLAS12TOOL/Banks/scaler.cpp+");
   gROOT->LoadMacro("$CLAS12TOOL/Banks/particle.cpp+");
   gROOT->LoadMacro("$CLAS12TOOL/Banks/mcparticle.cpp+");
   gROOT->LoadMacro("$CLAS12TOOL/Banks/particle_detector.cpp+");

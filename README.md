@@ -70,4 +70,12 @@ with particle angles cut on region
 
    ph.Hist2D("P.Theta:P.Time",100,0.001,3,100,0,300,"P.Region==CD&&CTOF.Time")->Draw("")
 
-   ph.Save("output.root")	
+   ph.Save("output.root")
+
+################################################################
+
+OR fast drawing of bank items with BankHist
+
+BankHist ph("my/hipo/file.hipo");
+
+hists.Hist1D("REC::Particle::Px",1000,-5,5,"REC::Particle::Px")->Draw("");

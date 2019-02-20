@@ -26,6 +26,8 @@ namespace clas12 {
     _btraj  = std::make_shared<traj>(factory.getSchema("REC::Traj"));
     _bcher  = std::make_shared<cherenkov>(factory.getSchema("REC::Cherenkov"));
     _bft    = std::make_shared<forwardtagger>(factory.getSchema("REC::ForwardTagger"));
+    _bvtp    = std::make_shared<clas12::vtp>(factory.getSchema("RAW::vtp"));
+    _bscal = std::make_shared<clas12::scaler>(factory.getSchema("RAW::scaler"));
 
  
     //add some detector regions to their vectors
@@ -34,12 +36,9 @@ namespace clas12 {
     addARegionFT();
   
   }
-  ////////////////////////////////////////////////////////
-  ///initialise next event from the reader
-  bool clas12reader::next(){
-    if(!_reader.next())
-      return false;
-    
+  ///////////////////////////////////////////////////////
+  ///read the data
+  void clas12reader::readEvent(){
     _reader.read(_event);
     _event.getStructure(*_bparts.get());
     _event.getStructure(*_bmcparts.get());
@@ -51,7 +50,18 @@ namespace clas12 {
     _event.getStructure(*_btraj.get());
     _event.getStructure(*_bcher.get());
     _event.getStructure(*_bft.get());
+    _event.getStructure(*_bvtp.get());
+    _event.getStructure(*_bscal.get());
+  }
+  ////////////////////////////////////////////////////////
+  ///initialise next event from the reader
+  bool clas12reader::next(){
+    if(!_reader.next())
+      return false;
+
+    readEvent();
     sort();
+    
     return true;
   }
   ////////////////////////////////////////////////////////
@@ -60,19 +70,9 @@ namespace clas12 {
     if(!_reader.nextInRecord())
       return false;
     
-    _reader.read(_event);
-    _event.getStructure(*_bparts.get());
-    _event.getStructure(*_bmcparts.get());
-    _event.getStructure(*_bcovmat.get());
-    _event.getStructure(*_bhead.get());
-    _event.getStructure(*_bcal.get());
-    _event.getStructure(*_bscint.get());
-    _event.getStructure(*_btrck.get());
-    _event.getStructure(*_btraj.get());
-    _event.getStructure(*_bcher.get());
-    _event.getStructure(*_bft.get());
-
+    readEvent();
     sort();
+    
     return true;
   }
   ////////////////////////////////////////////////////////
@@ -82,7 +82,6 @@ namespace clas12 {
 
     
     _nparts=_bparts->getRows();
-    //cout<<_nparts<<endl;
     _n_rfdets=0;
     _n_rcdets=0;
     _n_rfts=0;
@@ -133,10 +132,6 @@ namespace clas12 {
 	  addARegionFT();
 	continue;
       }
-      //cout<<"Warning clas12reader::sort() apparent particle with no detectors "<<i <<endl;
-      // cout<<_bcal->scanForParticle(i).size()<<" "<<_bscint->scanForParticle(i).size()<<" "<<_btrck->scanForParticle(i).size()<<" "<<_bcher->scanForParticle(i).size()<<" "<<_bft->scanForParticle(i).size()<<" "<<endl;
-      // _bparts->show();
-      // _bcal->show();_bscint->show();_btrck->show();_bcher->show();_bft->show();
     }
   }
   ////////////////////////////////////////////////////////

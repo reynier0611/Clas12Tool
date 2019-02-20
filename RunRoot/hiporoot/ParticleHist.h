@@ -17,13 +17,12 @@ namespace hiporoot {
 
 
     void Loop() final;
-    TString ExpandVars(TString varExp0,TString seperator);
-    TString ExpandPart(TString exp);
-    TString ExpandExpression(TString varExp0,TString seperator) final;
-    TString ExpandParenthesis(TString varExp0,TString seperator);
-    TString AddParenthesis(TString varExp0);
+    /* TString ExpandVars(TString varExp0,TString seperator); */
+    /* TString ExpandPart(TString exp); */
+    /* TString ExpandExpression(TString varExp0,TString seperator) final; */
+    /* TString ExpandParenthesis(TString varExp0,TString seperator); */
+    /* TString AddParenthesis(TString varExp0); */
     
-    vector<TString> RemoveArithmetic(TString& expr);
     
     using c12_uptr = std::unique_ptr<clas12::clas12reader>;
     
@@ -34,7 +33,6 @@ namespace hiporoot {
     
   private :
  
-    std::map<TString,TString> _mapOfParts;
  
   };
 }

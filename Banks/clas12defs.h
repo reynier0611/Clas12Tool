@@ -23,9 +23,9 @@ namespace clas12{
 
 
   //layers
-  static const short FTOF1A = 0;
-  static const short FTOF1B = 1;
-  static const short FTOF2 = 2;
+  static const short FTOF1A = 1;
+  static const short FTOF1B = 2;
+  static const short FTOF2 = 3;
   //CDET scint layers same as detectors
   //static const short CND  = 3;
   //static const short CTOF = 4;

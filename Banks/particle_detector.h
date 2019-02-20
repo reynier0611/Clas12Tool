@@ -67,6 +67,7 @@ namespace clas12 {
    /*    return _index=-1; */
    /*  } */
     void setIndex(int ind){_index=ind;}
+    void setEntry(int ind){_index=ind;}
     
     ////////////////////////////////////////////////////////////////
     //virtual functions can be overridden in derived class

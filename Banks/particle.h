@@ -85,7 +85,8 @@ namespace clas12 {
       auto z= getFloat(pz_order,_entry);
       return sqrt(x*x+y*y+z*z);
     }
-   void setEntry(short i){ _entry=i;}
+    
+    void setEntry(short i){ _entry=i;}
     short getEntry() const {return _entry;}
     /**
     * This is virtual method from hipo::bank it will be called

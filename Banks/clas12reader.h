@@ -23,6 +23,8 @@
 #include "traj.h"
 #include "cherenkov.h"
 #include "header.h"
+#include "vtp.h"
+#include "scaler.h"
 #include "covmatrix.h"
 #include "forwardtagger.h"
 #include "region_particle.h"
@@ -48,6 +50,7 @@ namespace clas12 {
     bool next();
     bool nextInRecord();
     void sort();
+    void readEvent();
     
     void addARegionFDet(){
       //Forward detector needs particles, calorimeter, scintillator,
@@ -66,6 +69,8 @@ namespace clas12 {
 
 
     const head_ptr head() const{return _bhead;};
+    const vtp_ptr vtp() const{return _bvtp;};
+    const scaler_ptr scaler() const{return _bscal;};
     const mcpar_ptr mcparts() const{return _bmcparts;};
     
     
@@ -92,6 +97,8 @@ namespace clas12 {
     traj_ptr _btraj;
     cher_ptr _bcher;
     ft_ptr _bft;
+    vtp_ptr _bvtp;
+    scaler_ptr _bscal;
 
     //Detector region vectors,
     //each particle in an event will have
