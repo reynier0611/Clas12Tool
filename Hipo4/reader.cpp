@@ -188,20 +188,6 @@ bool  reader::next(){
     }
     return true;
 }
-// bool  reader::nextInRecord(){
-//     if(readerEventIndex.canAdvanceInRecord()==false) return false;
-//     int recordNumber = readerEventIndex.getRecordNumber();
-//     readerEventIndex.advance();
-//     int recordToBeRead = readerEventIndex.getRecordNumber();
-//     if(recordToBeRead!=recordNumber){
-//       long position = readerEventIndex.getPosition(recordToBeRead);
-//       inputRecord.readRecord(inputStream,position,0);
-//       /*printf(" record changed from %d to %d at event %d total event # %d\n",
-//         recordNumber, recordToBeRead,readerEventIndex.getEventNumber(),
-//         readerEventIndex.getMaxEvents());*/
-//     }
-//     return true;
-// }
   bool  reader::loadRecord(int irec){
     
     long position = readerEventIndex.getPosition(irec);
@@ -215,14 +201,14 @@ bool  reader::next(){
   }
 
 void reader::printWarning(){
-    #ifndef __LZ4__
-      std::cout << "******************************************************" << std::endl;
-      std::cout << "* WARNING:                                           *" << std::endl;
-      std::cout << "*   This library war compiled without LZ4 support.   *" << std::endl;
-      std::cout << "*   Reading and writing compressed buffers will not  *" << std::endl;
-      std::cout << "*   work. However un-compressed file I/O will work.  *" << std::endl;
-      std::cout << "******************************************************" << std::endl;
-    #endif
+    // #ifndef __LZ4__
+    //   std::cout << "******************************************************" << std::endl;
+    //   std::cout << "* WARNING:                                           *" << std::endl;
+    //   std::cout << "*   This library war compiled without LZ4 support.   *" << std::endl;
+    //   std::cout << "*   Reading and writing compressed buffers will not  *" << std::endl;
+    //   std::cout << "*   work. However un-compressed file I/O will work.  *" << std::endl;
+    //   std::cout << "******************************************************" << std::endl;
+    // #endif
   }
 }
 

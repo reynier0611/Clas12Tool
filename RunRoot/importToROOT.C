@@ -12,11 +12,11 @@
     gSystem->AddIncludePath("-D__LZ4__");
     gSystem->AddIncludePath(TString("-I")+gSystem->Getenv("CLAS12TOOL")+"/Lz4/lib");
   }
-  else{
-    printf("\n   >>>>> LZ4 compression is not supported.");
-    printf("\n   >>>>> check if libz4 is installed on your system.");  
-    printf("\n   >>>>> and included in LD_LIBRARY_PATH");  
-  }
+  // else{
+  //   printf("\n   >>>>> LZ4 compression is not supported.");
+  //   printf("\n   >>>>> check if libz4 is installed on your system.");  
+  //   printf("\n   >>>>> and included in LD_LIBRARY_PATH");  
+  // }
 
   //Hipo
   gSystem->AddIncludePath(TString("-I")+gSystem->Getenv("CLAS12TOOL")+"/Hipo4");

@@ -9,19 +9,24 @@ git clone --recurse-submodules https://github.com/dglazier/Clas12Tool.git
 
 git checkout mesonex4
 
+
 ## To setup Run ROOT
 
 cd Clas12Tool
 
 setenv CLAS12TOOL $PWD
 
-cd RunRoot
+cd Lz4
+
+make
+
+cd $CLAS12TOOL/RunRoot
 
 alias clas12reader root -l $CLAS12TOOL/RunRoot/importToROOT.C
 
 ##to run example
 
-clas12reader Ex1_CLAS12Reader.C --in=/path/to/hipo/file.hipo (accepts wildcards)
+clas12reader Ex1_CLAS12Reader.C+ --in=/path/to/hipo/file.hipo (accepts wildcards)
 
 
 ###########################################################
@@ -79,3 +84,4 @@ OR fast drawing of bank items with BankHist
 BankHist ph("my/hipo/file.hipo");
 
 hists.Hist1D("REC::Particle::Px",1000,-5,5,"REC::Particle::Px")->Draw("");
+

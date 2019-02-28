@@ -83,14 +83,16 @@ void Ex1_CLAS12Reader(){
      //create the hallb event
       clas12reader event(files->At(i)->GetTitle());
 
+
      while(event.next()==true){
-         event.head()->getStartTime();
-       //Loop over all particles to see how to access detector info.
-       for(auto& p : event.getDetParticles()){
-	 //  get predefined selected information
+        event.head()->getStartTime();
+        //Loop over all particles to see how to access detector info.
+	for(auto& p : event.getDetParticles()){
+  	 //  get predefined selected information
 	 p->getTime();
 	 p->getDetEnergy();
 	 p->getDeltaEnergy();
+
 	 // get any detector information (if exists for this particle)
 	 // there should be a get function for any entry in the bank
 	 switch(p->getRegion()) {
@@ -119,7 +121,7 @@ void Ex1_CLAS12Reader(){
 	 // p->covmat()->print();
 	 p->cmat();
        }
-  
+    
        // get particles by type
        auto electrons=event.getByID(11);
        auto gammas=event.getByID(22);

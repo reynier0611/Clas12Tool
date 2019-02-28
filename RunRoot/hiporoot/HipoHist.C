@@ -71,6 +71,7 @@ namespace hiporoot {
 	ny=TString(xandy->At(1)->GetName()).Atoi();
 	TCanvas* canvas=new TCanvas();
 	canvas->Divide(nx,ny);
+	canvas->Draw();
 	Npads=nx*ny;
       }
       //remove split option
@@ -79,18 +80,21 @@ namespace hiporoot {
       opt.ReplaceAll(splitopt,"");
     }
     //Simple 1 hist on 1 canvas
+    TCanvas* canvas1=nullptr;
     if(_curHist.size()==1){
-      if(!gPad) new TCanvas();
+      if(!gPad) canvas1=new TCanvas();
       _curHist[0]->DrawCopy(opt);
+      canvas1->Draw();
       return;	
     }
     if(!Npads){
       //Simple many hists on many canvas
       for(auto* hist : _curHist){
 	if(!opt.Contains("same")){
-	  new TCanvas();
+	  canvas1=new TCanvas();
 	}
 	hist->DrawCopy(opt);
+	canvas1->Draw();
       }
     }
     else{
