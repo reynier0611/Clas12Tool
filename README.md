@@ -7,12 +7,13 @@ for CLAS12 data structures and convertor to ROOT.
 
 git clone --recurse-submodules https://github.com/dglazier/Clas12Tool.git
 
-git checkout mesonex4
+cd Clas12Tool
+
+git checkout proof
 
 
 ## To setup Run ROOT
 
-cd Clas12Tool
 
 setenv CLAS12TOOL $PWD
 
