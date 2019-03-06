@@ -23,6 +23,7 @@
 #include <TH2.h>
 #include <TCanvas.h>
 #include <TSystem.h>
+#include <TRandom.h>
 #include <TStyle.h>
 #include <chrono>
 #include <thread>
@@ -77,18 +78,15 @@ namespace hiporoot{
     // The tree argument is deprecated (on PROOF 0 is passed).
 
     TString option = GetOption();
-    fInput->Print();
     _chain=dynamic_cast<HipoChain*>(fInput->FindObject("HIPOFILES"));
-    //TString outdirstr=TString(outdir->GetTitle());
-    cout<<"HipoSelector::SlaveBegin( "<<_chain<<endl;
-    cout<<"HipoSelector::SlaveBegin( "<<_chain->GetNFiles()<<endl;
-
-    _hist1=new TH1F("Time","Time",600,-100,500);
+  
+    _hist1=new TH1F("Time","Time",600,-100,500);   
     fOutput->Add(_hist1);
   }
 
   Bool_t HipoSelector::Process(Long64_t entry)
   {
+    gSystem->Sleep(gRandom->Uniform()*100+0.05);
     //check if need new file
     _iRecord=entry-_NfileRecords; //get record to analyse,subtract records of previous files
     if( _iRecord>=_NcurrRecords ){
@@ -112,11 +110,14 @@ namespace hiporoot{
     //cout<<"Done record "<<_iRecord<<" "<<_iFile<<endl;
     return kTRUE;
   }
+  
   Bool_t HipoSelector::ProcessEvent(){
 
     _hist1->Fill(_c12->head()->getStartTime());
-    return kTRUE;    
+    return kTRUE;
+    
   }
+  
   void HipoSelector::SlaveTerminate()
   {
     // The SlaveTerminate() function is called after all entries or objects

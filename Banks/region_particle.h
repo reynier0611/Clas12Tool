@@ -86,6 +86,9 @@ namespace clas12 {
     float getPhi() const;
     float getP(){_parts->setEntry(_pentry);return _parts->getP();}
     float getCalcMass();
+    float getBeta();
+    float getGamma();
+    
   protected:
 
     par_ptr _parts;

@@ -9,6 +9,7 @@
 //***********************************************************************
 #include <cstdlib>
 #include <iostream>
+#include <TBenchmark.h>
 #include "reader.h"
 
 
@@ -26,91 +27,36 @@ int main(int argc, char** argv) {
       std::cout << " *** please provide a file name..." << std::endl;
      exit(0);
    }
-
+   //open hipo4 file for reading
    hipo::reader  reader;
    reader.open(inputFile);
 
+   //read dictionary ~ bank configuration
    hipo::dictionary  factory;
-
    reader.readDictionary(factory);
-
-   factory.show();
-   hipo::structure  particles;
-   hipo::structure  detectors;
-
+   
+   //event for holding data
    hipo::event      event;
-   int counter = 0;
-
-   hipo::bank  dataPART;
-   hipo::bank  dataCALO;
-
+   //particular bank we are interested in
    hipo::bank PART(factory.getSchema("REC::Particle"));
-   hipo::bank PART1(factory.getSchema("MC::Lund"));
-   hipo::bank PART2(factory.getSchema("REC::CovMat"));
-   hipo::bank PART3(factory.getSchema("REC::Event"));
-   hipo::bank PART4(factory.getSchema("REC::Calorimeter"));
-   hipo::bank PART5(factory.getSchema("REC::Scintillator"));
-   hipo::bank PART6(factory.getSchema("REC::Track"));
-   hipo::bank PART7(factory.getSchema("REC::Traj"));
-   hipo::bank PART8(factory.getSchema("REC::Cherenkov"));
-   hipo::bank PART9(factory.getSchema("REC::ForwardTagger"));
 
-   auto PART_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::Particle"));
-   auto PART1_ptr=std::make_shared<hipo::bank>(factory.getSchema("MC::LUND"));
-   auto PART2_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::CovMat"));
-   auto PART3_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::Event"));
-   auto PART4_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::Calorimeter"));
-   auto PART5_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::Scintillator"));
-   auto PART6_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::Track"));
-   auto PART7_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::Traj"));
-   auto PART8_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::Cherenkov"));
-   auto PART9_ptr=std::make_shared<hipo::bank>(factory.getSchema("REC::ForwardTagger"));
+   while(reader.next()==true){//loop over all events
+     reader.read(event); //read event
+     event.getStructure(PART); //get particle data
+  
+      int nrows = PART.getRows();
 
-   while(reader.next()==true){
-      reader.read(event);
-      //reader.next();
-      //event.getStructure(dataBank,30,1);
-      //dataBank.show();
-      // event.getStructure(PART);
-      // event.getStructure(PART1);
-      // event.getStructure(PART2);
-      // event.getStructure(PART3);
-      // event.getStructure(PART4);
-      // event.getStructure(PART5);
-      // event.getStructure(PART6);
-      // event.getStructure(PART7);
-      // event.getStructure(PART8);
-      // event.getStructure(PART9);
-      event.getStructure(*PART_ptr.get());
-      event.getStructure(*PART1_ptr.get());
-      event.getStructure(*PART2_ptr.get());
-      event.getStructure(*PART3_ptr.get());
-      event.getStructure(*PART4_ptr.get());
-      event.getStructure(*PART5_ptr.get());
-      event.getStructure(*PART6_ptr.get());
-      event.getStructure(*PART7_ptr.get());
-      event.getStructure(*PART8_ptr.get());
-      event.getStructure(*PART9_ptr.get());
-  //PART.show();
-      int nrows = PART5_ptr->getRows();
-      //  std::cout<<nrows<<std::endl;
-      // for(int i = 0; i < nrows; i++){
-      //   int   pid = PART.getInt("pid",i);
-      //   float  px = PART.getFloat("px",i);
-      //   float  py = PART.getFloat("py",i);
-      //   float  pz = PART.getFloat("pz",i);
+      for(int i = 0; i < nrows; i++){
+        int   pid = PART.getInt("pid",i);
+        float  px = PART.getFloat("px",i);
+        float  py = PART.getFloat("py",i);
+        float  pz = PART.getFloat("pz",i);
 
-      //   /*int   pid = PART.getInt(1,i);
-      //   float  px = PART.getFloat(2,i);
-      //   float  py = PART.getFloat(3,i);
-      //   float  pz = PART.getFloat(4,i);*/
-      //   printf("%6d %8.4f %8.4f %8.4f\n",pid,px,py,pz);
-      // }
-      //event.getStructure(dataCALO,300,32);
-      //dataPART.show();
-      counter++;
+       }
    }
-   printf("processed events = %d\n",counter);
+   //   rbenchmark->Stop("timer");
+   //rbenchmark->Print("timer");
+  printf("processed events = %d\n",counter);
 /*
    int counter = 0;
    while(reader.next()==true){

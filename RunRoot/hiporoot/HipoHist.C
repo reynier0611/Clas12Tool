@@ -39,7 +39,6 @@ namespace hiporoot {
   void HipoHist::Draw(TString opt){
     gBenchmark->Reset();
     gBenchmark->Start("compile time");
-    PreCompileAction();
     CompileAction();
     gBenchmark->Stop("compile time");
     gBenchmark->Print("compile time");
@@ -84,7 +83,7 @@ namespace hiporoot {
     if(_curHist.size()==1){
       if(!gPad) canvas1=new TCanvas();
       _curHist[0]->DrawCopy(opt);
-      canvas1->Draw();
+      gPad->Draw();
       return;	
     }
     if(!Npads){

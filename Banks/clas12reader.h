@@ -47,11 +47,13 @@ namespace clas12 {
     clas12reader(string filename);
     ~clas12reader()=default;
 
+    hipo::reader& getReader(){return _reader;}
+    
     bool next();
     bool nextInRecord();
     void sort();
     void readEvent();
-    
+   
     void addARegionFDet(){
       //Forward detector needs particles, calorimeter, scintillator,
       //track, cherenkov

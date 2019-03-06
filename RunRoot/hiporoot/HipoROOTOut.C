@@ -57,7 +57,7 @@ namespace hiporoot{
     TString strline=macro.GetLineWith("XXXX")->GetString();
     strline.ReplaceAll("////","");
     strline.ReplaceAll("XXXX",varExp);
-    strline.ReplaceAll("(IIII)",Form("(%d)",_Nactions++));
+    strline.ReplaceAll("IIII",Form("%d",_Nactions++));
     strline.ReplaceAll("CCCC",condExp);
     
     TList *lines=macro.GetListOfLines();
@@ -77,7 +77,8 @@ namespace hiporoot{
   }
   
   void HipoROOTOut::CompileAction(){
-      TMacro macro(_curMacro);
+    PreCompileAction();
+    TMacro macro(_curMacro);
     macro.Print();
     
     auto result=gROOT->LoadMacro(Form("%s++",_curMacro.Data()));

@@ -21,7 +21,7 @@ namespace hiporoot {
     virtual HipoHist* Hist1D(TString varExp,Int_t nbins,Float_t min,Float_t max,TString condExp="1");
     virtual HipoHist* Hist2D(TString varExp,Int_t nbinsX,Float_t minX,Float_t maxX,
 		     Int_t nbinsY,Float_t minY,Float_t maxY,TString condExp="1");
-    virtual void PreCompileAction(){};
+   
     
     void Draw(TString opt="");
     void OnCanvas(TString opt);

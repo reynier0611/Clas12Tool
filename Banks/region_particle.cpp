@@ -72,13 +72,26 @@ namespace clas12 {
   float region_particle::getCalcMass() {
     float p=getP();
     float t=getTime()-_head->getStartTime();
-    float d=getPath();
+    float d=getPath()/100;
     if(t==0)
       return 0;
     if(p==0)
       return 0;
-    float mass= d/t/p*2.9979246e+08/1E9;
+    float mass= d/t/p/2.9979246e+08*1E9;
     return mass;
+  }
+  float region_particle::getBeta() {
+    float t=getTime()-_head->getStartTime();
+    float d=getPath()/100;
+    if(t==0)
+      return 0;
+    float beta= d/t/2.9979246e+08*1E9;
+    return beta;
+  }
+  float region_particle::getGamma() {
+    float beta=getBeta();
+    float gamma= sqrt(1/(1-beta*beta));
+    return gamma;
   }
 
 }

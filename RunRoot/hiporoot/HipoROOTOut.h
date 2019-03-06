@@ -23,7 +23,8 @@ namespace hiporoot {
     //  virtual TString ExpandVars(TString varExp0,TString seperator){return varExp0;};    
     virtual TString ExpandExpression(TString varExp0,TString seperator);    
     virtual void Loop()=0;
-    
+    virtual void PreCompileAction(){};
+ 
     //  virtual Double_t Action()=0;
     virtual Bool_t Condition(){return kTRUE;}
 
@@ -46,6 +47,8 @@ namespace hiporoot {
     TString _actionClassName;
     std::map<TString,TString> _mapOfParts;
 
+    TString GetCurrMacroName(){return _curMacro;}
+    Int_t GetNActions(){return _Nactions;}
   private :
 
     TString _hipoFileName;

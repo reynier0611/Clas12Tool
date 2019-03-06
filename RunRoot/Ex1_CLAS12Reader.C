@@ -85,7 +85,7 @@ void Ex1_CLAS12Reader(){
 
 
      while(event.next()==true){
-        event.head()->getStartTime();
+       event.head()->getStartTime();
         //Loop over all particles to see how to access detector info.
 	for(auto& p : event.getDetParticles()){
   	 //  get predefined selected information

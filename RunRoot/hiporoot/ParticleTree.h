@@ -1,22 +1,23 @@
 #pragma once
 
 
-#include "HipoHist.h"
+#include "HipoTreeMaker.h"
 #include "clas12reader.h"
 #include <map>
 
 namespace hiporoot {
 
   
-  class ParticleHist : public HipoHist {
+  class ParticleTree : public HipoTreeMaker {
 
 
   public :
-    ParticleHist(TString filename);
-    virtual ~ParticleHist();
+    ParticleTree(TString filename, TString treefilename);
+    virtual ~ParticleTree();
 
 
     void Loop() final;
+    void PreCompileAction() final;
     
     
     using c12_uptr = std::unique_ptr<clas12::clas12reader>;

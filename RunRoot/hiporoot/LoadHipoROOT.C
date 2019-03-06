@@ -20,6 +20,8 @@ void LoadHipoROOT(){
   gROOT->LoadMacro(HIPOROOT+"HipoHist.C+");
   gROOT->LoadMacro(HIPOROOT+"ParticleHist.C+");
   gROOT->LoadMacro(HIPOROOT+"BankHist.C+");
+  gROOT->LoadMacro(HIPOROOT+"HipoTreeMaker.C+");
+  gROOT->LoadMacro(HIPOROOT+"ParticleTree.C+");
 
 
 
