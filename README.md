@@ -28,10 +28,17 @@ cd Clas12Tool
 
 ## To setup Run ROOT
 
+for cshrc
 
 setenv CLAS12TOOL $PWD  (the actual path can be added in your bashrc or tchrc)
 
 setenv PATH "$PATH":"$CLAS12TOOL/bin"
+
+or for bash
+
+export CLAS12TOOL=$PWD
+
+export PATH="$PATH":"$CLAS12TOOL/bin"
 
 ## To install (either Hipo3 or Hipo4)
 

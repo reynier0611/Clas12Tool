@@ -39,7 +39,7 @@ namespace clas12 {
     _bcher->init("REC::Cherenkov",_reader);
     _bft->init("REC::ForwardTagger",_reader);
     _btrck->init("REC::Track",_reader);
-    _btrck->init("REC::Traj",_reader);
+    _btraj->init("REC::Traj",_reader);
  
     //add some detector regions to their vectors
     addARegionFDet();
