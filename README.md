@@ -86,6 +86,11 @@ Click on the notebook CLAS12Reader3Pi.ipynb and follow the tutorial
 
        particleDraw4 /WHERE/IS/MY/HIPO/file.hipo
 
+Or chain together files with wildcard, note the ' '
+
+       particleDraw4 '/WHERE/IS/MY/HIPO/file_*.hipo'
+
+
 You will get an interactive ROOT prompt where you can draw histograms:
 
     ParticleHist [0] hists.Hist1D("P.P",100,0,10,"P.P")
@@ -129,6 +134,10 @@ Click on the notebook HipoDraw.ipynb and follow the tutorial
 ## Ex 4 Filtering and Skimming into a ROOT ntuple (tree)
 
        particleTree4  /WHERE/IS/MY/HIPO/file.hipo /OUTPUT/tree.root Ex4_TreeMaker.C
+       
+Or chain together files with wildcard, note the ' '
+
+       particleTree4  '/WHERE/IS/MY/HIPO/file_*.hipo' /OUTPUT/tree.root Ex4_TreeMaker.C
 
 The script $CLAS12ROOT/RunRoot/Ex4_TreeMaker.C defines which branches are to be written and what cuts to put on the event topology. You can copy and edit this file to do what you want e.g.
 
