@@ -27,8 +27,8 @@ namespace clas12root {
     _mapOfParts["FTHODO"]="p->ft(FTHODO)->";
 
     //Cherenkov
-    _mapOfParts["HTCC"]="p->ft(HTCC)->";
-    _mapOfParts["LTCC"]="p->ft(LTCC)->";
+    _mapOfParts["HTCC"]="p->che(HTCC)->";
+    _mapOfParts["LTCC"]="p->che(LTCC)->";
 
     //Trackers
     _mapOfParts["DC"]="p->trk(DC)->";

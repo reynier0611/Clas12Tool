@@ -23,7 +23,6 @@ namespace clas12root {
   }
   
   HipoTreeMaker* HipoTreeMaker::Branch(TString varExp,TString condExp){
-
     TString branchType=varExp;
     branchType.Remove(0,branchType.Sizeof()-3); //keep /F etc
     varExp.Remove(varExp.Sizeof()-3,2); //remove /F etc
@@ -33,7 +32,7 @@ namespace clas12root {
     
     varExp=ExpandExpression(varExp,"");
     AddAction(varExp);
-   
+  
    return this;
   }
   void HipoTreeMaker::Fill(){

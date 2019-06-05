@@ -28,8 +28,8 @@ namespace clas12root {
     _mapOfParts["FTHODO"]="p->ft(FTHODO)->";
 
     //Cherenkov
-    _mapOfParts["HTCC"]="p->ft(HTCC)->";
-    _mapOfParts["LTCC"]="p->ft(LTCC)->";
+    _mapOfParts["HTCC"]="p->che(HTCC)->";
+    _mapOfParts["LTCC"]="p->che(LTCC)->";
 
     //Trackers
     _mapOfParts["DC"]="p->trk(DC)->";
@@ -66,25 +66,33 @@ namespace clas12root {
     typelabel["/I"]="Int_t";
     typelabel["/L"]="Long64_t";
     typelabel["/S"]="Short_t";
-    
+ 
     TMacro macro(GetCurrMacroName());
-  
+
     TList *lines=macro.GetListOfLines();
     TObject* obj=macro.GetLineWith("class clas12data");
     Int_t place =lines->IndexOf(obj)+2; 
- 
+  
     for(UInt_t i=0;i<_branchNames.size();i++){
       TString type=typelabel[_branchTypes[i]];
+     
       TString bname=_branchNames[i];
+     
       bname.ReplaceAll(".","_");
+      
       TString strline=TString("     ")+type + "  "+bname+";";
+      
       lines->AddAt(new TObjString(strline.Data()),place++);
-
-      TString strvar=Form("VVVV%d",i);
+     
+      TString strvar=Form("VVVV%d|",i);
+     
+      
       TString vvvvline=macro.GetLineWith(strvar)->GetString();
+     
       vvvvline.ReplaceAll(strvar,bname);
       macro.GetLineWith(strvar)->SetString(vvvvline);
     }
+   
     TString strvar{"if(PCCCC)_treedata"};
     TString ccccline=macro.GetLineWith(strvar)->GetString();
     ccccline.ReplaceAll("PCCCC",_pcut);

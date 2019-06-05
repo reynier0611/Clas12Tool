@@ -46,7 +46,7 @@ namespace clas12root{
 	if(ECCCC) continue;
 	
 	for(auto& p : *particles){
-	  ////particleData.VVVVIIII = XXXX;
+	  ////particleData.VVVVIIII| = XXXX;
 
 	  if(PCCCC)_treedata->push_back(particleData);
 	}
