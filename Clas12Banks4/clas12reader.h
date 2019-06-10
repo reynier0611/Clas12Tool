@@ -16,13 +16,16 @@
 #include "clas12defs.h"
 #include "reader.h"
 #include "particle.h"
+#include "ftbparticle.h"
 #include "mcparticle.h"
 #include "calorimeter.h"
 #include "scintillator.h"
 #include "tracker.h"
 #include "traj.h"
 #include "cherenkov.h"
-#include "header.h"
+#include "event.h"
+#include "runconfig.h"
+#include "ftbevent.h"
 #include "vtp.h"
 #include "scaler.h"
 #include "covmatrix.h"
@@ -63,20 +66,22 @@ namespace clas12 {
     void addARegionFDet(){
       //Forward detector needs particles, calorimeter, scintillator,
       //track, cherenkov
-      _rfdets.push_back(std::make_shared<region_fdet>(_bparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft,_bhead));
+      _rfdets.push_back(std::make_shared<region_fdet>(_bparts,_bftbparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft,_bevent));
     }
      void addARegionCDet(){
       //Forward detector needs particles, calorimeter, scintillator,
       //track, cherenkov
-       _rcdets.push_back(std::make_shared<region_cdet>(_bparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft,_bhead));
+       _rcdets.push_back(std::make_shared<region_cdet>(_bparts,_bftbparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft,_bevent));
     }
     void addARegionFT(){
       //Forward tagger needs particles and forward tagger
-      _rfts.push_back(std::make_shared<region_ft>(_bparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft,_bhead));
+      _rfts.push_back(std::make_shared<region_ft>(_bparts,_bftbparts,_bcovmat,_bcal,_bscint,_btrck,_btraj,_bcher,_bft,_bevent));
     }
 
 
-    const head_ptr head() const{return _bhead;};
+    const runconfig_ptr runconfig() const{return _brunconfig;};
+    const event_ptr event() const{return _bevent;};
+    const ftbevent_ptr ftbevent() const{return _bftbevent;};
     const vtp_ptr vtp() const{return _bvtp;};
     const scaler_ptr scaler() const{return _bscal;};
     const mcpar_ptr mcparts() const{return _bmcparts;};
@@ -108,8 +113,11 @@ namespace clas12 {
     hipo::event      _event;
 
     //DST banks
-    head_ptr  _bhead;
+    runconfig_ptr  _brunconfig;
+    event_ptr  _bevent;
+    ftbevent_ptr  _bftbevent;
     par_ptr _bparts;
+    ftbpar_ptr _bftbparts;
     mcpar_ptr _bmcparts;
     covmat_ptr _bcovmat;
     cal_ptr  _bcal;
@@ -139,6 +147,7 @@ namespace clas12 {
     ushort _n_rcdets=0;
     ushort _n_rfts=0;
     bool _zeroOfRestPid=false;
+    bool _useFTBased=false;
 
   };
   //helper functions

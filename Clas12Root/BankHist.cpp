@@ -20,7 +20,10 @@ namespace clas12root {
     _mapOfParts["REC::CovMat"]="covmatrix";
     _mapOfParts["RAW::vtp"]="vtp";
     _mapOfParts["RAW::scaler"]="scaler";
-    _mapOfParts["REC::Event"]="header";
+    // _mapOfParts["REC::Event"]="header";
+    _mapOfParts["REC::Event"]="event";
+    _mapOfParts["RECFT::Event"]="ftbevent";
+    _mapOfParts["RUN::config"]="runconfig";
   
 
   }

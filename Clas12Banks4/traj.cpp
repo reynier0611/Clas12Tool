@@ -15,15 +15,12 @@ namespace clas12 {
     _cx_order   =  __schema.getEntryOrder("cx");
     _cy_order   =  __schema.getEntryOrder("cy");
     _cz_order   =  __schema.getEntryOrder("cz");
-    _detector_id_order   =  __schema.getEntryOrder("detID");
-    _index_order   =  __schema.getEntryOrder("index");
-    _pathlength_order   =  __schema.getEntryOrder("pathlength");
-    _pindex_order   =  __schema.getEntryOrder("pindex");
-    _q_order   =  __schema.getEntryOrder("q");
+    _path_order   =  __schema.getEntryOrder("path");
     _x_order   =  __schema.getEntryOrder("x");
     _y_order   =  __schema.getEntryOrder("y");
     _z_order   =  __schema.getEntryOrder("z");
-    
+    _layer_order   = __schema.getEntryOrder("layer");
+ 
   }
 
 

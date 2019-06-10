@@ -18,8 +18,8 @@ namespace clas12 {
   ///////////////////////////////////////////////////////
   ///Constructor used for event,
   ///give all detector banks to prevent crashes when looking for FT 
-  region_cdet::region_cdet(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,head_ptr head):
-    region_particle(pars,cm,calp,scp,trp,trj,chp,ftp,head)
+  region_cdet::region_cdet(par_ptr pars,ftbpar_ptr ftbpars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,event_ptr event):
+    region_particle(pars,ftbpars,cm,calp,scp,trp,trj,chp,ftp,event)
   {
     _region=clas12::CD;
   }

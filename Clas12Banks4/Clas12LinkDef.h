@@ -6,9 +6,11 @@
 #pragma link C++ nestedclasses;
  
 //#pragma link C++ defined_in "utils.h";
-#pragma link C++ class clas12::vectors+;
-#pragma link C++ class clas12::header+;
+#pragma link C++ class clas12::runconfig+;
+#pragma link C++ class clas12::event+;
+#pragma link C++ class clas12::ftbevent+;
 #pragma link C++ class clas12::particle+;
+#pragma link C++ class clas12::ftbparticle+;
 #pragma link C++ class clas12::mcparticle+;
 #pragma link C++ class clas12::scaler+;
 #pragma link C++ class clas12::vtp+;

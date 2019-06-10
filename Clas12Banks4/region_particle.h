@@ -16,12 +16,13 @@
 
 #include "clas12defs.h"
 #include "particle.h"
+#include "ftbparticle.h"
 #include "covmatrix.h"
 #include "calorimeter.h"
 #include "scintillator.h"
 #include "tracker.h"
 #include "traj.h"
-#include "header.h"
+#include "event.h"
 #include "cherenkov.h"
 #include "forwardtagger.h"
 
@@ -45,8 +46,9 @@ namespace clas12 {
     region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp,
 		    scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp);
     //For all regions
-    region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp,
-		    scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,head_ptr head);
+    region_particle(par_ptr pars,ftbpar_ptr ftbpars,covmat_ptr cm, cal_ptr calp,
+		    scint_ptr scp, trck_ptr trp, traj_ptr trj,
+		    cher_ptr chp, ft_ptr ftp,event_ptr event);
 
     virtual ~region_particle()=default;
 
@@ -68,8 +70,9 @@ namespace clas12 {
     virtual double getDeltaEnergy()=0;
     virtual short getSector() =0;
 
-    const head_ptr head() const{return _head;};
+    const event_ptr event() const{return _event;};
     const par_ptr par() const{_parts->setEntry(_pentry);return _parts;};
+    const ftbpar_ptr ftbpar() const{_ftbparts->setEntry(_pentry);return _ftbparts;};
     const covmat_ptr covmat() const{_covmat->setIndex(_pcmat);return _covmat;};
     virtual const cal_ptr cal(ushort lay) const{_cal->setIndex(-1);return _cal;};
     virtual const scint_ptr sci(ushort lay) const{_scint->setIndex(-1);return _scint;};
@@ -92,6 +95,7 @@ namespace clas12 {
   protected:
 
     par_ptr _parts;
+    ftbpar_ptr _ftbparts;
     covmat_ptr _covmat;
     ft_ptr  _ft;
     cal_ptr  _cal;
@@ -99,7 +103,7 @@ namespace clas12 {
     trck_ptr _trck;
     traj_ptr _traj;
     cher_ptr _cher;
-    head_ptr _head;
+    event_ptr _event;
  
     
     //particle index

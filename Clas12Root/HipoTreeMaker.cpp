@@ -22,12 +22,13 @@ namespace clas12root {
     _evcut+=ExpandExpression(cut,"");
   }
   
-  HipoTreeMaker* HipoTreeMaker::Branch(TString varExp,TString condExp){
+  HipoTreeMaker* HipoTreeMaker::Branch(TString varExp,TString alias){
     TString branchType=varExp;
     branchType.Remove(0,branchType.Sizeof()-3); //keep /F etc
     varExp.Remove(varExp.Sizeof()-3,2); //remove /F etc
 
-    _branchNames.push_back(varExp);
+    if(alias!=TString()) _branchNames.push_back(alias);
+    else _branchNames.push_back(varExp);
     _branchTypes.push_back(branchType);
     
     varExp=ExpandExpression(varExp,"");
@@ -35,6 +36,20 @@ namespace clas12root {
   
    return this;
   }
+  // HipoTreeMaker* HipoTreeMaker::EvBranch(TString varExp,TString alias){
+  //   TString branchType=varExp;
+  //   branchType.Remove(0,branchType.Sizeof()-3); //keep /F etc
+  //   varExp.Remove(varExp.Sizeof()-3,2); //remove /F etc
+
+  //   if(alias!=TString()) _evbranchNames.push_back(alias);
+  //   else _evbranchNames.push_back(varExp);
+  //   _evbranchTypes.push_back(branchType);
+    
+  //   varExp=ExpandExpression(varExp,"");
+  //   AddAction(varExp);
+  
+  //  return this;
+  // }
   void HipoTreeMaker::Fill(){
     gBenchmark->Reset();
     gBenchmark->Start("compile time");

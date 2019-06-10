@@ -9,7 +9,7 @@ namespace clas12root {
   ParticleTree::ParticleTree(TString filename, TString treefilename): HipoTreeMaker{filename,treefilename}{
     _tempActionName="ParticleTreeAction";
 
-    //Calorimters
+    //Calorimeters
     _mapOfParts["ECIN"]="p->cal(ECIN)->";
     _mapOfParts["ECOUT"]="p->cal(ECOUT)->";
     _mapOfParts["PCAL"]="p->cal(PCAL)->";
@@ -43,7 +43,12 @@ namespace clas12root {
 
     //EVENT
     _mapOfParts["EVNT"]="c12.head()->";
+    _mapOfParts["EVNT4"]="c12.event()->";
+    _mapOfParts["EVNTFT"]="c12.ftbevent()->";
 
+    //RUN
+     _mapOfParts["RUN"]="c12.runconfig()->";
+     
     //C12
     _mapOfParts["C12"]="c12.";
     _mapOfParts["C12.NPid"]="c12.getNPid";
@@ -70,10 +75,14 @@ namespace clas12root {
     TMacro macro(GetCurrMacroName());
 
     TList *lines=macro.GetListOfLines();
+
+    //First add particle branches to clas12data class
     TObject* obj=macro.GetLineWith("class clas12data");
-    Int_t place =lines->IndexOf(obj)+2; 
+    cout<<"OBJ "<<obj<<" "<<_branchNames.size()<<endl;
+   Int_t place =lines->IndexOf(obj)+2; 
   
     for(UInt_t i=0;i<_branchNames.size();i++){
+      //First add data members to the class
       TString type=typelabel[_branchTypes[i]];
      
       TString bname=_branchNames[i];
@@ -81,18 +90,44 @@ namespace clas12root {
       bname.ReplaceAll(".","_");
       
       TString strline=TString("     ")+type + "  "+bname+";";
-      
+      cout<<strline<<endl;
       lines->AddAt(new TObjString(strline.Data()),place++);
-     
+
+      //Now get the value for this datamember
       TString strvar=Form("VVVV%d|",i);
      
-      
+      cout<<strvar<<endl;
       TString vvvvline=macro.GetLineWith(strvar)->GetString();
-     
+      cout<<vvvvline<<endl;
       vvvvline.ReplaceAll(strvar,bname);
+       cout<<vvvvline<<endl;
+     
       macro.GetLineWith(strvar)->SetString(vvvvline);
     }
-   
+    /////////////////////////////////////////////////////
+    //Now add event branches to eventdata class
+    if(_useEventData){
+      obj=macro.GetLineWith("USEEVENTDATA");
+      if(obj)place =lines->IndexOf(obj)+1;
+      lines->AddAt(new TObjString("	_eventdata=new event_data;"),place++);
+      lines->AddAt(new TObjString("	tree->Branch(\"EventData\",&_eventdata);"),place++);
+      obj=macro.GetLineWith("Fill Event Data");
+      if(obj)place =lines->IndexOf(obj)+1;
+      lines->AddAt(new TObjString("	_eventdata->BeamCharge=evbank->getBeamCharge();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->StartTime=evbank->getStartTime();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->RFTime=evbank->getRFTime();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->ProcTime=evbank->getProcTime();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->LiveTime=evbank->getLiveTime();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->FTBStartTime=evbank->getFTBStartTime();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->Trigger=runbank->getTrigger();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->Category=evbank->getCategory();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->Topology=evbank->getTopology();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->Helicity=evbank->getHelicity();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->HelicityRaw=evbank->getHelicityRaw();"),place++);
+      lines->AddAt(new TObjString("	_eventdata->EventNumber=runbank->getEvent();"),place++);
+
+    }
+
     TString strvar{"if(PCCCC)_treedata"};
     TString ccccline=macro.GetLineWith(strvar)->GetString();
     ccccline.ReplaceAll("PCCCC",_pcut);

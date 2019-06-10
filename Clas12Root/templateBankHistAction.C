@@ -27,13 +27,14 @@ namespace clas12root{
 
       clas12::BBBB bank(factory.getSchema(bhist->GetBankName().Data()));
       hipo::event      event;
+ 
       while(reader.next()==true){
 	reader.read(event); //read event
 	event.getStructure(bank); //get particle data
 
 	int nrows = bank.getRows();
-	for(int i = 0; i < nrows; i++){
-	  bank.setEntry(i);
+     	for(int i = 0; i < nrows; i++){
+	  bank.setBankEntry(i);
 	  ////if(CCCC)hists->at(IIII)->Fill(XXXX);
 
 	}

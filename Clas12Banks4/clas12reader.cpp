@@ -16,10 +16,13 @@ namespace clas12 {
     _reader.readDictionary(factory);
 
     //initialise banks pointers
-    _bparts = std::make_shared<particle>(factory.getSchema("REC::Particle"));
+    _bftbparts = std::make_shared<ftbparticle>(factory.getSchema("RECFT::Particle"));
+    _bparts = std::make_shared<particle>(factory.getSchema("REC::Particle"),_bftbparts);
     _bmcparts = std::make_shared<mcparticle>(factory.getSchema("MC::Lund"));
     _bcovmat= std::make_shared<covmatrix>(factory.getSchema("REC::CovMat"));
-    _bhead  = std::make_shared<header>(factory.getSchema("REC::Event"));
+    _bftbevent  = std::make_shared<clas12::ftbevent>(factory.getSchema("RECFT::Event"));
+    _brunconfig  = std::make_shared<clas12::runconfig>(factory.getSchema("RUN::config"));
+    _bevent  = std::make_shared<clas12::event>(factory.getSchema("REC::Event"),_bftbevent);
     _bcal   = std::make_shared<calorimeter>(factory.getSchema("REC::Calorimeter"));
     _bscint = std::make_shared<scintillator>(factory.getSchema("REC::Scintillator"));
     _btrck  = std::make_shared<tracker>(factory.getSchema("REC::Track"));
@@ -52,16 +55,26 @@ namespace clas12 {
   }
   bool clas12reader::readEvent(){
     _reader.read(_event);
-    _event.getStructure(*_bparts.get());
+    _event.getStructure(*_bparts.get());//regular particle bank
+    _event.getStructure(*_bftbparts.get());//FT based PID particle bank
     
     //First check if event passes criteria
     _nparts=_bparts->getSize();
     _pids.clear();
     _pids.reserve(_nparts);
-      //Loop over particles and find their Pid
+
+    
+    //Loop over particles and find their Pid
     for(ushort i=0;i<_nparts;i++){
-      _bparts->setEntry(i);
-      _pids.emplace_back(_bparts->getPid());
+      if(!_useFTBased){
+	_bparts->setEntry(i);
+	_pids.emplace_back(_bparts->getPid());
+      }
+      else{
+	_bftbparts->setEntry(i);
+	_pids.emplace_back(_bftbparts->getPid());
+      }
+	
     }
     //check if event is of the right type
     if(!passPidSelect()) return false;
@@ -69,7 +82,9 @@ namespace clas12 {
     //now getthe data for the rest of the banks
     _event.getStructure(*_bmcparts.get());
     _event.getStructure(*_bcovmat.get());
-    _event.getStructure(*_bhead.get());
+    _event.getStructure(*_brunconfig.get());
+    _event.getStructure(*_bevent.get());
+    _event.getStructure(*_bftbevent.get());
     _event.getStructure(*_bcal.get());
     _event.getStructure(*_bscint.get());
     _event.getStructure(*_btrck.get());

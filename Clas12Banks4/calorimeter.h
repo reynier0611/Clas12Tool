@@ -50,11 +50,11 @@ namespace clas12 {
       return 0;
     }
     int getLayer() override{
-      if(_index>-1)return getInt(_layer_order,_index);
+      if(_index>-1)return getByte(_layer_order,_index);
       return 0;
     }
    int getSector(){
-      if(_index>-1)return getInt(_sector_order,_index);
+      if(_index>-1)return getByte(_sector_order,_index);
       return 0;
     }
     double getX(){
@@ -130,7 +130,7 @@ namespace clas12 {
       return 0;
     }
     int getStatus(){
-      if(_index>-1)return getInt(_status_order,_index);
+      if(_index>-1)return getShort(_status_order,_index);
       return 0;
     }
   

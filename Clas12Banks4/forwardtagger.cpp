@@ -12,6 +12,7 @@ namespace clas12 {
  
   forwardtagger::forwardtagger(hipo::schema __schema): clas12::particle_detector(__schema) {
 
+    if(useItem("layer"))_layer_order   = __schema.getEntryOrder("layer");
     if(useItem("energy"))_energy_order  = __schema.getEntryOrder("energy");
     if(useItem("path"))_path_order    = __schema.getEntryOrder("path");
     if(useItem("time"))_time_order    = __schema.getEntryOrder("time");

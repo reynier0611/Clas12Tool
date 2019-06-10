@@ -28,8 +28,8 @@ namespace clas12 {
   public:
 
     region_ft(par_ptr pars,covmat_ptr cm, ft_ptr ftp);
-    region_ft(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp,
-	      trck_ptr trp,  traj_ptr trj, cher_ptr chp, ft_ptr ftp,head_ptr head);
+    region_ft(par_ptr pars,ftbpar_ptr ftbpars,covmat_ptr cm, cal_ptr calp, scint_ptr scp,
+	      trck_ptr trp,  traj_ptr trj, cher_ptr chp, ft_ptr ftp,event_ptr event);
     ~region_ft()=default;
 
     

@@ -34,8 +34,8 @@ namespace clas12 {
     // region_fdet()=default;
     region_fdet(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp,
 		trck_ptr trp, traj_ptr trj, cher_ptr chp);
-    region_fdet(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp,
-		trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,head_ptr head);
+    region_fdet(par_ptr pars,ftbpar_ptr ftbpars,covmat_ptr cm, cal_ptr calp, scint_ptr scp,
+		trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,event_ptr event);
     ~region_fdet()=default;
 
     

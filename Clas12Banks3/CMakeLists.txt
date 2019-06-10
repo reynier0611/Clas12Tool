@@ -2,7 +2,7 @@ ROOT_GENERATE_DICTIONARY(G__Clas12Banks3  vectors.h header.h particle.h mcpartic
 
 add_library(Clas12Banks3 SHARED vectors.cpp header.cpp particle.cpp mcparticle.cpp detector.cpp scaler.cpp vtp.cpp particle_detector.cpp scintillator.cpp tracker.cpp traj.cpp forwardtagger.cpp cherenkov.cpp calorimeter.cpp covmatrix.cpp region_particle.cpp region_ft.cpp region_fdet.cpp region_cdet.cpp clas12reader.cpp   G__Clas12Banks3.cxx)
 
-target_link_libraries(Clas12Banks3 ${ROOT_LIBRARIES})
+target_link_libraries(Clas12Banks3 ${ROOT_LIBRARIES} Hipo3)
 
 install(TARGETS Clas12Banks3
   LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")

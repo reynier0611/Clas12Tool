@@ -41,8 +41,9 @@ namespace clas12 {
   {
     
   }
-  region_particle::region_particle(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,head_ptr head):
+  region_particle::region_particle(par_ptr pars,ftbpar_ptr ftbpars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,event_ptr event):
     _parts(pars),
+    _ftbparts(ftbpars),
     _covmat(cm),
     _cal(calp),
     _scint(scp),
@@ -50,7 +51,7 @@ namespace clas12 {
     _traj(trj),
     _cher(chp),
     _ft(ftp),
-    _head(head)
+    _event(event)
   {
     
   }
@@ -71,7 +72,7 @@ namespace clas12 {
   }
   float region_particle::getCalcMass() {
     float p=getP();
-    float t=getTime()-_head->getStartTime();
+    float t=getTime()-_event->getStartTime();
     float d=getPath()/100;
     if(t==0)
       return 0;
@@ -81,7 +82,7 @@ namespace clas12 {
     return mass;
   }
   float region_particle::getBeta() {
-    float t=getTime()-_head->getStartTime();
+    float t=getTime()-_event->getStartTime();
     float d=getPath()/100;
     if(t==0)
       return 0;

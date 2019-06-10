@@ -17,7 +17,8 @@ namespace clas12root {
 
 
  
-    virtual HipoTreeMaker* Branch(TString varExp,TString condExp="1");
+    virtual HipoTreeMaker* Branch(TString varExp,TString alias="");
+    //virtual HipoTreeMaker* EvBranch(TString varExp,TString alias="");
 
 
     TTree* Tree() const {return _tree;}
@@ -30,6 +31,8 @@ namespace clas12root {
     
     vector<TString> _branchNames;
     vector<TString> _branchTypes;
+    /* vector<TString> _evbranchNames; */
+    /* vector<TString> _evbranchTypes; */
     TString _evcut={"0"};
     TString _pcut={"1"};
 

@@ -17,6 +17,7 @@
 #include "bank.h"
 #include "vectors.h"
 #include "dictionary.h"
+#include "ftbparticle.h"
 #include <memory>
 
 namespace clas12 {
@@ -24,16 +25,19 @@ namespace clas12 {
   class particle : public hipo::bank {
 
   private:
-
-    int pid_order;
-    int px_order;
-    int py_order;
-    int pz_order;
-    int vx_order;
-    int vy_order;
-    int vz_order;
-    int ch_order;
-    int st_order;
+    ftbpar_ptr _ftbpar; //FT based bank
+    
+    int _pid_order;
+    int _px_order;
+    int _py_order;
+    int _pz_order;
+    int _vx_order;
+    int _vy_order;
+    int _vz_order;
+    int _beta_order;
+    int _ch_order;
+    int _st_order;
+    int _chi2pid_order;
     
     short _entry=0;
     
@@ -42,51 +46,60 @@ namespace clas12 {
     particle() = default;
     
     
-    particle(hipo::dictionary __factory);
     particle(hipo::schema __schema);
+    particle(hipo::schema __schema,ftbpar_ptr ftbpar);
     
     virtual ~particle() = default;
     
     
     //    void   init(const char *bankName, hipo::reader &r);
-    int    getPid(int index) { return getInt(pid_order,index);}
-    float  getPx(int index)  { return getFloat(px_order,index);}
-    float  getPy(int index)  { return getFloat(py_order,index);}
-    float  getPz(int index)  { return getFloat(pz_order,index);}
-    float  getVx(int index)  { return getFloat(vx_order,index);}
-    float  getVy(int index)  { return getFloat(vy_order,index);}
-    float  getVz(int index)  { return getFloat(vz_order,index);}
-    int    getCharge(int index)  { return getInt(ch_order,index);}
-    int    getStatus(int index)  { return getInt(st_order,index);}
+    int    getPid(int index) { return getInt(_pid_order,index);}
+    float  getPx(int index)  { return getFloat(_px_order,index);}
+    float  getPy(int index)  { return getFloat(_py_order,index);}
+    float  getPz(int index)  { return getFloat(_pz_order,index);}
+    float  getVx(int index)  { return getFloat(_vx_order,index);}
+    float  getVy(int index)  { return getFloat(_vy_order,index);}
+    float  getVz(int index)  { return getFloat(_vz_order,index);}
+    float  getBeta(int index)  { return getFloat(_beta_order,index);}
+    float  getChi2Pid(int index)  { return getFloat(_chi2pid_order,index);}
+    int    getCharge(int index)  { return getByte(_ch_order,index);}
+    int    getStatus(int index)  { return getShort(_st_order,index);}
 
-    int    getPid() { return getInt(pid_order,_entry);}
-    float  getPx()  { return getFloat(px_order,_entry);}
-    float  getPy()  { return getFloat(py_order,_entry);}
-    float  getPz()  { return getFloat(pz_order,_entry);}
-    float  getVx()  { return getFloat(vx_order,_entry);}
-    float  getVy()  { return getFloat(vy_order,_entry);}
-    float  getVz()  { return getFloat(vz_order,_entry);}
-    int    getCharge()  { return getInt(ch_order,_entry);}
-    int    getStatus()  { return getInt(st_order,_entry);}
+    int    getPid() { return getInt(_pid_order,_entry);}
+    float  getPx()  { return getFloat(_px_order,_entry);}
+    float  getPy()  { return getFloat(_py_order,_entry);}
+    float  getPz()  { return getFloat(_pz_order,_entry);}
+    float  getVx()  { return getFloat(_vx_order,_entry);}
+    float  getVy()  { return getFloat(_vy_order,_entry);}
+    float  getVz()  { return getFloat(_vz_order,_entry);}
+    float  getBeta()  { return getFloat(_beta_order,_entry);}
+    float  getChi2Pid()  { return getFloat(_chi2pid_order,_entry);}
+    int    getCharge()  { return getByte(_ch_order,_entry);}
+    int    getStatus()  { return getShort(_st_order,_entry);}
 
-    void  getVector3(int index, vector3 &vect){
-      vect.setXYZ(getFloat(px_order,index),getFloat(py_order,index),
-            getFloat(pz_order,index));
-    }
+    int    getFTBPid() { return _ftbpar->getPid();}
+    float  getFTBBeta()  { return _ftbpar->getBeta();}
+    float  getFTBChi2Pid()  { return _ftbpar->getChi2Pid();}
+    int    getFTBStatus()  { return _ftbpar->getStatus();}
+  /* void  getVector3(int index, vector3 &vect){ */
+    /*   vect.setXYZ(getFloat(_px_order,index),getFloat(_py_order,index), */
+    /*         getFloat(_pz_order,index)); */
+    /* } */
 
-    void getVector4(int index, vector4 &vect, double mass){
-      vect.setXYZM(getFloat(px_order,index),getFloat(py_order,index),
-            getFloat(pz_order,index),mass);
-    }
+    /* void getVector4(int index, vector4 &vect, double mass){ */
+    /*   vect.setXYZM(getFloat(_px_order,index),getFloat(_py_order,index), */
+    /*         getFloat(_pz_order,index),mass); */
+    /* } */
  
     float getP(){
-      auto x= getFloat(px_order,_entry);
-      auto y= getFloat(py_order,_entry);
-      auto z= getFloat(pz_order,_entry);
+      auto x= getFloat(_px_order,_entry);
+      auto y= getFloat(_py_order,_entry);
+      auto z= getFloat(_pz_order,_entry);
       return sqrt(x*x+y*y+z*z);
     }
     
-    void setEntry(short i){ _entry=i;}
+    void setEntry(short i){ _entry=i;_ftbpar->setEntry(i);}
+    void setBankEntry(short i){ _entry=i;} //faster for BankHist
     short getEntry() const {return _entry;}
     /**
     * This is virtual method from hipo::bank it will be called

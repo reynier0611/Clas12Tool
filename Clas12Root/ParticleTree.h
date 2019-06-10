@@ -32,11 +32,13 @@ namespace clas12root {
       return std::move(c12_uptr
 		       (new clas12::clas12reader(HipoFileName().Data())));
     }
-    
+
+    void UseEventData(){_useEventData=kTRUE;}
   private :
    std::map<short,short> _pidSelect;
    std::map<short,short> _pidSelectExact;
    bool _zeroOfRestPid=false;
+   bool _useEventData=kFALSE;
  
   };
 }

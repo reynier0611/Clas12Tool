@@ -59,14 +59,14 @@ namespace clas12 {
   }
   ////////////////////////////////////////////////////////
   ///initialise next event from the reader
-  // bool clas12reader::nextInRecord(){
+  bool clas12reader::nextInRecord(){
   //   if(!_reader.nextInRecord())
   //     return false;
     
   //   sort();
     
-  //   return true;
-  // }
+    return true;
+  }
   ////////////////////////////////////////////////////////
   /// Loop over particles and find their region
   /// Add appropriate region_partcle to event particle vector

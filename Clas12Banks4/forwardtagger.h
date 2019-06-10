@@ -33,6 +33,14 @@ namespace clas12 {
     virtual ~forwardtagger()=default;
     
     //getter funtions for items in forwardtagger bank
+    int getLayer(int index) override{
+      if(index>-1)return getInt(_layer_order,index);
+      return 0;
+    }
+    int getLayer() override{
+      if(_index>-1)return getByte(_layer_order,_index);
+      return 0;
+    }
     double getTime(){ 
       if(_index>-1)return getFloat(_time_order,_index);
       return 0;
@@ -45,12 +53,8 @@ namespace clas12 {
       if(_index>-1)return getFloat(_path_order,_index);
       return 0;
     }
-    int getSector(){ 
-      if(_index>-1)return getInt(_sector_order,_index);
-      return 0;
-    }
    int getStatus(){ 
-      if(_index>-1)return getInt(_status_order,_index);
+      if(_index>-1)return getShort(_status_order,_index);
       return 0;
     }
    double getX(){ 
@@ -90,9 +94,9 @@ namespace clas12 {
  private:
 
     int  _energy_order=-1;
+    int   _layer_order=-1;
     int    _path_order=-1;
     int    _time_order=-1;
-    int  _sector_order=-1;
     int  _status_order=-1;
     int       _x_order=-1;
     int       _y_order=-1;

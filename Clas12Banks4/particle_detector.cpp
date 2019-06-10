@@ -87,12 +87,11 @@ namespace clas12 {
     return _index=-1;
   }
    void  particle_detector::scanIndex(){
-  
      _rvec.clear();
      const int size = getRows();
      _rvec.reserve(size);
      for(int i = 0; i < size; i++){
-        int detector = getDetector(i);
+       int detector = getDetector(i);
        int layer= getLayer(i);
        int pindex   = getPindex(i);
        int key = (detector<<16)|(layer<<8)|pindex;

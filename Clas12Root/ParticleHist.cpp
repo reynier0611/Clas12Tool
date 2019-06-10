@@ -43,10 +43,18 @@ namespace clas12root {
     //Particle Region
     _mapOfParts["P"]="p->";
 
-    //EVENT
-    _mapOfParts["EVNT"]="c12.head()->";
+    //RUN
+     _mapOfParts["RUN"]="c12.runconfig()->";
 
-  }
+     //EVENT
+    _mapOfParts["EVNT"]="c12.head()->";
+    _mapOfParts["EVNT4"]="c12.event()->";
+    _mapOfParts["EVNTFT"]="c12.ftbevent()->";
+
+     //C12
+    _mapOfParts["C12"]="c12.";
+    _mapOfParts["C12.NPid"]="c12.getNPid";
+ }
   ParticleHist::~ParticleHist(){
     }
   void ParticleHist::Loop(){
