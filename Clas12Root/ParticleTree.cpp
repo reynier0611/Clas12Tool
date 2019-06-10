@@ -78,8 +78,7 @@ namespace clas12root {
 
     //First add particle branches to clas12data class
     TObject* obj=macro.GetLineWith("class clas12data");
-    cout<<"OBJ "<<obj<<" "<<_branchNames.size()<<endl;
-   Int_t place =lines->IndexOf(obj)+2; 
+    Int_t place =lines->IndexOf(obj)+2; 
   
     for(UInt_t i=0;i<_branchNames.size();i++){
       //First add data members to the class
@@ -90,18 +89,14 @@ namespace clas12root {
       bname.ReplaceAll(".","_");
       
       TString strline=TString("     ")+type + "  "+bname+";";
-      cout<<strline<<endl;
       lines->AddAt(new TObjString(strline.Data()),place++);
 
       //Now get the value for this datamember
       TString strvar=Form("VVVV%d|",i);
      
-      cout<<strvar<<endl;
       TString vvvvline=macro.GetLineWith(strvar)->GetString();
-      cout<<vvvvline<<endl;
       vvvvline.ReplaceAll(strvar,bname);
-       cout<<vvvvline<<endl;
-     
+      
       macro.GetLineWith(strvar)->SetString(vvvvline);
     }
     /////////////////////////////////////////////////////
@@ -132,7 +127,8 @@ namespace clas12root {
     TString ccccline=macro.GetLineWith(strvar)->GetString();
     ccccline.ReplaceAll("PCCCC",_pcut);
     macro.GetLineWith(strvar)->SetString(ccccline);
-        
+
+    //Apply and cuts/selections
     obj=macro.GetLineWith("add Pid selections");
     place =lines->IndexOf(obj)+1; 
     for(auto const& selectp : _pidSelect){

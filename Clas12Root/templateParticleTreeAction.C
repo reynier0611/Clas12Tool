@@ -74,7 +74,7 @@ namespace clas12root{
 	}
 	//////Fill Event Data
 
-	  if(_treedata->size()) tree->Fill();
+	if(_treedata->size()) tree->Fill();
  	_treedata->clear();
      }
     }
@@ -83,15 +83,3 @@ namespace clas12root{
 
   
 }
-	// _eventdata->BeamCharge=evbank->getBeamCharge();
-	// _eventdata->StartTime=evbank->getStartTime();
-	// _eventdata->RFTime=evbank->getRFTime();
-	// _eventdata->ProcTime=evbank->getProcTime();
-	// _eventdata->LiveTime=evbank->getLiveTime();
-	// _eventdata->FTBStartTime=evbank->getFTBStartTime();
-	// _eventdata->Trigger=runbank->getTrigger();
-	// _eventdata->Category=evbank->getCategory();
-	// _eventdata->Topology=evbank->getTopology();
-	// _eventdata->Helicity=evbank->getHelicity();
-	// _eventdata->HelicityRaw=evbank->getHelicityRaw();
-	// _eventdata->EventNumber=runbank->getEvent();
