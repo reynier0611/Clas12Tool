@@ -16,21 +16,21 @@ namespace clas12 {
     _reader.readDictionary(factory);
 
     //initialise banks pointers
-    _bftbparts = std::make_shared<ftbparticle>(factory.getSchema("RECFT::Particle"));
-    _bparts = std::make_shared<particle>(factory.getSchema("REC::Particle"),_bftbparts);
-    _bmcparts = std::make_shared<mcparticle>(factory.getSchema("MC::Lund"));
-    _bcovmat= std::make_shared<covmatrix>(factory.getSchema("REC::CovMat"));
-    _bftbevent  = std::make_shared<clas12::ftbevent>(factory.getSchema("RECFT::Event"));
-    _brunconfig  = std::make_shared<clas12::runconfig>(factory.getSchema("RUN::config"));
-    _bevent  = std::make_shared<clas12::event>(factory.getSchema("REC::Event"),_bftbevent);
-    _bcal   = std::make_shared<calorimeter>(factory.getSchema("REC::Calorimeter"));
-    _bscint = std::make_shared<scintillator>(factory.getSchema("REC::Scintillator"));
-    _btrck  = std::make_shared<tracker>(factory.getSchema("REC::Track"));
-    _btraj  = std::make_shared<traj>(factory.getSchema("REC::Traj"));
-    _bcher  = std::make_shared<cherenkov>(factory.getSchema("REC::Cherenkov"));
-    _bft    = std::make_shared<forwardtagger>(factory.getSchema("REC::ForwardTagger"));
-    _bvtp    = std::make_shared<clas12::vtp>(factory.getSchema("RAW::vtp"));
-    _bscal = std::make_shared<clas12::scaler>(factory.getSchema("RAW::scaler"));
+    if(factory.hasSchema("RECFT::Particle"))_bftbparts = std::make_shared<ftbparticle>(factory.getSchema("RECFT::Particle"));
+    if(factory.hasSchema("REC::Particle"))_bparts = std::make_shared<particle>(factory.getSchema("REC::Particle"),_bftbparts);
+    if(factory.hasSchema("MC::Lund"))_bmcparts = std::make_shared<mcparticle>(factory.getSchema("MC::Lund"));
+    if(factory.hasSchema("REC::CovMat"))_bcovmat= std::make_shared<covmatrix>(factory.getSchema("REC::CovMat"));
+    if(factory.hasSchema("RECFT::Event"))_bftbevent  = std::make_shared<clas12::ftbevent>(factory.getSchema("RECFT::Event"));
+    if(factory.hasSchema("RUN::config"))_brunconfig  = std::make_shared<clas12::runconfig>(factory.getSchema("RUN::config"));
+    if(factory.hasSchema("REC::Event"))_bevent  = std::make_shared<clas12::event>(factory.getSchema("REC::Event"),_bftbevent);
+    if(factory.hasSchema("REC::Calorimeter"))_bcal   = std::make_shared<calorimeter>(factory.getSchema("REC::Calorimeter"));
+    if(factory.hasSchema("REC::Scintillator"))_bscint = std::make_shared<scintillator>(factory.getSchema("REC::Scintillator"));
+    if(factory.hasSchema("REC::Track"))_btrck  = std::make_shared<tracker>(factory.getSchema("REC::Track"));
+    if(factory.hasSchema("REC::Traj"))_btraj  = std::make_shared<traj>(factory.getSchema("REC::Traj"));
+    if(factory.hasSchema("REC::Cherenkov"))_bcher  = std::make_shared<cherenkov>(factory.getSchema("REC::Cherenkov"));
+    if(factory.hasSchema("REC::ForwardTagger"))_bft    = std::make_shared<forwardtagger>(factory.getSchema("REC::ForwardTagger"));
+    //if(factory.hasSchema("RAW::vtp"))_bvtp    = std::make_shared<clas12::vtp>(factory.getSchema("RAW::vtp"));
+    //if(factory.hasSchema("RAW::scaler"))_bscal = std::make_shared<clas12::scaler>(factory.getSchema("RAW::scaler"));
 
  
     //add some detector regions to their vectors
