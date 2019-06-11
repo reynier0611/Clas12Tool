@@ -58,7 +58,7 @@ namespace clas12 {
     virtual bool sort(){
       _pentry=_parts->getEntry();
       //check for covarince matrix
-      _pcmat=_covmat->getIndex(_pentry);
+      if(_covmat.get())_pcmat=_covmat->getIndex(_pentry);
        return true;
     }
 
