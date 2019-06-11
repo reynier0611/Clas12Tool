@@ -56,7 +56,7 @@ namespace clas12 {
   bool clas12reader::readEvent(){
     _reader.read(_event);
     _event.getStructure(*_bparts.get());//regular particle bank
-    _event.getStructure(*_bftbparts.get());//FT based PID particle bank
+    if(_bftbparts.get())_event.getStructure(*_bftbparts.get());//FT based PID particle bank
     
     //First check if event passes criteria
     _nparts=_bparts->getSize();
