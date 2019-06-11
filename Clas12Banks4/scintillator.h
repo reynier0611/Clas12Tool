@@ -32,7 +32,7 @@ namespace clas12 {
     virtual ~scintillator()=default;
     
    int getLayer(int index) override{ 
-      if(index>-1)return getInt(_layer_order,index);
+      if(index>-1)return getByte(_layer_order,index);
       return 0;
     }
     //getter funtions for items in scintillator bank

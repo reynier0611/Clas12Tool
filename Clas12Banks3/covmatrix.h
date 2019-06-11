@@ -28,10 +28,7 @@ namespace clas12 {
  
   public:
 
-    //covmatrix() { }
-    //vmatrix(const char *bankName, hipo::reader &r) : hipo::bank(bankName,r){
-    //
-    
+     
   
     //get the pindex = corresponding particle index
     int getPindex(int index) { return getInt(_pindex_order,index);}
@@ -40,6 +37,7 @@ namespace clas12 {
     int getIndex(int pindex);
     void setIndex(int ind){_index=ind;}
     void setEntry(int ind){_index=ind;}
+    void setBankEntry(int ind){_index=ind;}
 
     const  CovMatrix* matrix();
     float getC11(){ return getFloat(_morder[0][0],_index);}

@@ -58,8 +58,8 @@ namespace clas12root{
      }
       clas12::clas12reader c12(ptree->NextFile().Data());
       std::vector<region_part_ptr>* particles=c12.getDetParticlesPtr();
-      auto evbank=c12.event();
-      auto runbank=c12.runconfig();
+      //EVENTDATABANKS
+
       //add Pid selections
  
       clas12data particleData;

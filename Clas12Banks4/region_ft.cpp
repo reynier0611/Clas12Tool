@@ -10,13 +10,6 @@
 namespace clas12 {
 
   ///////////////////////////////////////////////////////
-  /// constructor used for stand-alone
-  region_ft::region_ft(par_ptr pars,covmat_ptr cm, ft_ptr ftp):
-    region_particle(pars,cm,ftp)
-  {
-    _region=clas12::FT;
-  }
-  ///////////////////////////////////////////////////////
   ///Constructor used for event,
   ///give all detector banks to prevent crashes when looking for FD
   region_ft::region_ft(par_ptr pars,ftbpar_ptr ftbpars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,event_ptr event):
@@ -66,6 +59,15 @@ namespace clas12 {
     _ft->setIndex(-1);return _ft;
   }
   
-
+///////////////////////////////////////////////////////
+  /// Get pointer to traj banks for this particle
+  /// This should be used directly to acess data
+  /// e.g. p->traj(FT,FTCAL)->getCx(); //detector without layer
+  ///      p->traj(FT,FTHODO)->getX();
+  const traj_ptr region_ft::traj(ushort det,ushort layer) const {
+    _traj->getIndex(_pentry,det,layer);
+   return _traj;
+  }
+  
 
 }

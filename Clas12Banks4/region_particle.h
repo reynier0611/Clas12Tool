@@ -77,7 +77,7 @@ namespace clas12 {
     virtual const cal_ptr cal(ushort lay) const{_cal->setIndex(-1);return _cal;};
     virtual const scint_ptr sci(ushort lay) const{_scint->setIndex(-1);return _scint;};
     virtual const trck_ptr trk(ushort lay) const{_trck->setIndex(-1);return _trck;};
-    virtual const traj_ptr traj(ushort det) const{_traj->setIndex(-1);return _traj;};
+    virtual const traj_ptr traj(ushort det,ushort layer=0) const{_traj->setIndex(-1);return _traj;};
     virtual const cher_ptr che(ushort lay) const{_cher->setIndex(-1);return _cher;};
     virtual const ft_ptr ft(ushort lay) const{_ft->setIndex(-1);return _ft;};
 

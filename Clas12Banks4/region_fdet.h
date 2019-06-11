@@ -32,10 +32,9 @@ namespace clas12 {
   public:
 
     // region_fdet()=default;
-    region_fdet(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp,
-		trck_ptr trp, traj_ptr trj, cher_ptr chp);
-    region_fdet(par_ptr pars,ftbpar_ptr ftbpars,covmat_ptr cm, cal_ptr calp, scint_ptr scp,
-		trck_ptr trp, traj_ptr trj, cher_ptr chp, ft_ptr ftp,event_ptr event);
+    region_fdet(par_ptr pars,ftbpar_ptr ftbpars,covmat_ptr cm,
+		cal_ptr calp, scint_ptr scp, trck_ptr trp,
+		traj_ptr trj, cher_ptr chp, ft_ptr ftp,event_ptr event);
     ~region_fdet()=default;
 
     
@@ -43,7 +42,7 @@ namespace clas12 {
 
     const cal_ptr cal(ushort lay) const final;
     const scint_ptr sci(ushort lay) const final;
-    const traj_ptr traj(ushort det) const final;
+    const traj_ptr traj(ushort det,ushort layer=0) const final;
     const trck_ptr trk(ushort lay) const final
     {
       _trck->setIndex(_ptrck);return _trck;

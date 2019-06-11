@@ -106,6 +106,12 @@ namespace clas12root {
       if(obj)place =lines->IndexOf(obj)+1;
       lines->AddAt(new TObjString("	_eventdata=new event_data;"),place++);
       lines->AddAt(new TObjString("	tree->Branch(\"EventData\",&_eventdata);"),place++);
+
+      obj=macro.GetLineWith("EVENTDATABANKS");
+      if(obj)place =lines->IndexOf(obj)+1;
+      lines->AddAt(new TObjString("      auto evbank=c12.event();"),place++);
+      lines->AddAt(new TObjString("      auto runbank=c12.runconfig();"),place++);
+
       obj=macro.GetLineWith("Fill Event Data");
       if(obj)place =lines->IndexOf(obj)+1;
       lines->AddAt(new TObjString("	_eventdata->BeamCharge=evbank->getBeamCharge();"),place++);

@@ -78,7 +78,8 @@ namespace clas12 {
    /*    return _index=-1; */
    /*  } */
     void setIndex(int ind){_index=ind;}
-    
+    void setBankEntry(short i){ _index=i;} //faster for BankHist
+
     ////////////////////////////////////////////////////////////////
     //virtual functions can be overridden in derived class
     virtual int getLayer(int index=0){return 0;}

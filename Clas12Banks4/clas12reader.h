@@ -137,10 +137,10 @@ namespace clas12 {
     std::vector<region_ft_ptr> _rfts;
     std::vector<region_part_ptr> _detParticles;
 
-    std::vector<short> _pids;
-    std::vector<short> _givenPids;
-    std::map<short,short> _pidSelect;
-    std::map<short,short> _pidSelectExact;
+    std::vector<int> _pids;
+    std::vector<int> _givenPids;
+    std::map<int,int> _pidSelect;
+    std::map<int,int> _pidSelectExact;
 
     ushort _nparts=0;
     ushort _n_rfdets=0;

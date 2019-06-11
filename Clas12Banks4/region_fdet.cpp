@@ -7,14 +7,7 @@
 #include "region_fdet.h"
 
 namespace clas12 {
-  ///////////////////////////////////////////////////////
-  /// constructor used for stand-alone
-  region_fdet::region_fdet(par_ptr pars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj, cher_ptr chp):
-    region_particle(pars,cm,calp,scp,trp,trj,chp)
-  {
-    _region=clas12::FD;
-  }
-  ///////////////////////////////////////////////////////
+   ///////////////////////////////////////////////////////
   ///Constructor used for event,
   ///give all detector banks to prevent crashes when looking for FT 
   region_fdet::region_fdet(par_ptr pars,ftbpar_ptr ftbpars,covmat_ptr cm, cal_ptr calp, scint_ptr scp, trck_ptr trp, traj_ptr trj,cher_ptr chp, ft_ptr ftp,event_ptr event):
@@ -111,10 +104,10 @@ namespace clas12 {
   ///////////////////////////////////////////////////////
   /// Get pointer to traj banks for this particle
   /// This should be used directly to acess data
-  /// e.g. p->traj(TRAJ_HTCC)->getCx();
-  ///      p->traj(TRAJ_DC3)->getX();
-  const traj_ptr region_fdet::traj(ushort det) const {
-    _traj->getIndex(_pentry,det);
+  /// e.g. p->traj(HTCC)->getCx(); //detector without layer
+  ///      p->traj(FTOF,FTOF1A)->getX(); //detector with layer
+  const traj_ptr region_fdet::traj(ushort det,ushort layer) const {
+    _traj->getIndex(_pentry,det,layer);
    return _traj;
   }
   

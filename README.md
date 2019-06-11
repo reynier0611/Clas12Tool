@@ -13,6 +13,8 @@ The Hipo c++ reader library can be used independent of specific banks and ROOT, 
 
 The Clas12Banks implementation can be used independent of ROOT, although currently ROOT dictionaries are created for the classes via cmake (this could be removed). This defines the specific CLAS12 DST banks and provides an interface to the data.
 
+For actual Clas12Banks definitions see [HIPO4 DSTs](https://clasweb.jlab.org/wiki/index.php/CLAS12_DSTs)
+
 The Clas12Root package depends on both Hipo and Clas12Banks. This provides ROOT-like analysis tools for operating on clas12 hipo DSTs.
 
     HipoDraw
@@ -52,6 +54,25 @@ If there are issues with cmake and your ROOTSYS you can try using the local Find
 ## interactive root session
 
 To start an interactive session with pre-loaded Clas12Root us clas12root3 or clas12root4 instead of root on the command line.
+
+## Ex 0 Plotting an item from any bank (HIPO4)
+
+This is faster than the particle draw as it only requires the reading of 1 bank.
+
+     	       clas12root4
+
+     	       BankHist bankDraw("/WHERE/IS/MY/HIPO/file.hipo");
+	       bankDraw.Hist1D("REC::Particle::Pz",100,0,10,"")->Draw()
+	       bankDraw.Hist1D("REC::Scintillator::Time",1000,0,200,"")->Draw()
+
+You can group histograms together for lazy execution if they all come from the same bank.
+
+	       bankDraw.Hist1D("REC::CovMat::C11",100,0,1,"")
+	       bankDraw.Hist1D("REC::CovMat::C22",100,0,1,"")
+	       bankDraw.Hist1D("REC::CovMat::C33",100,0,1,"")
+	       bankDraw.Hist1D("REC::CovMat::C44",100,0,1,"")	
+	       bankDraw.Hist1D("REC::CovMat::C55",100,0,1,"")->Draw("(3x2)")
+
 
 ## Ex 1  Looping over events and getting particle information
 
@@ -117,12 +138,24 @@ The REC::Particle bank should be directly accessed with
 
         PBANK.
         e.g. PBANK.Pid , PBANK.Px
+
+The FT based equaivalent PID varaibles can be accessed from the particle bank by
+
+        e.g. PBANK.FTBPid , PBANK.FTBBeta
         
-The region particle should be accessed with 
+The region particle has derived quantities such as theta and phi as well as selected variabels for a particle for example time from a particular ToF layer. Note the order of precedence for the FD is TOF1B, TOF1A, TOF2, PCAL and DeltaEnergy is the corresponding timing detector energy. These should be accessed with 
 
         P.
         e.g. P.Theta , P.P , P.Phi , P.Region , P.Time , P.DetEnergy , P.DeltaEnergy , P.Path , P.Pid , P.CalcMass
 	e.g. P.Region==FT,  P.Region==FD
+
+For REC::EVNT use (adding FTB for RECFT::EVNT banks)
+
+        e.g. EVNT.StartTime (Hipo3) EVNT4.StartTime (Hipo4) EVNT4.FTBStartTime (hipo4 from RECFT)
+
+For Run::config (hipo4)
+
+       e.g. RUN.Trigger
 
 ### Jupyter
 Start a ROOT note book :
@@ -139,7 +172,7 @@ Or chain together files with wildcard, note the ' '
 
        particleTree4  '/WHERE/IS/MY/HIPO/file_*.hipo' /OUTPUT/tree.root Ex4_TreeMaker.C
 
-The script $CLAS12ROOT/RunRoot/Ex4_TreeMaker.C defines which branches are to be written and what cuts to put on the event topology. You can copy and edit this file to do what you want e.g.
+The script $CLAS12ROOT/RunRoot/Ex4_TreeMaker.C defines which branches are to be written and what cuts to put on the event topology. You can copy and edit this file to do what you want. The branches should use the conventions above for accessing different bank items e.g.
 
      treemaker.Branch("P.Time/F"); //create tree with time branch
      treemaker.Branch("PBANK.Px/F"); //create tree with particle Px branch
@@ -179,14 +212,19 @@ e.g.
     	    return kTRUE;    
   	 }
 
-To execute :
+To execute (note the + is important) :
 
 
-       clas12proof4 4 mySelector.C Ex3_ProofLite.C
+       clas12proof4 4 mySelector.C+ Ex3_ProofLite.C
 
 Note 4 = number of workers used, you should change this to however many you would like.
 
 Note mySelector is hard-coded in Ex3_ProofLite.C so for your own selector you should copy and edit this script.
+
+As a more complete example you can check testSelector in RunRoot which implements the particle analysis and histogramming from Ex1. This can be run with Ex3b_TestSelector.C once you change the HipoChain files :
+
+         clas12proof4 8 testSelector.C+ Ex3b_TestSelector.C
+
 
 ### Jupyter
 

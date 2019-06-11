@@ -8,5 +8,6 @@
 //#pragma link C++ defined_in "utils.h";
 #pragma link C++ class hipo::bank+;
 #pragma link C++ class hipo::reader+;
+#pragma link C++ class hipo::writer+;
 
 #endif

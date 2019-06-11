@@ -54,7 +54,10 @@ namespace clas12root {
      //C12
     _mapOfParts["C12"]="c12.";
     _mapOfParts["C12.NPid"]="c12.getNPid";
- }
+
+    //Trajectories
+    //_mapOfParts["TRAJ[FTOF,FTOF1A]"]="p->traj(FTOF,FTOF1A)->";
+  }
   ParticleHist::~ParticleHist(){
     }
   void ParticleHist::Loop(){

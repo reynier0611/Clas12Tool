@@ -70,10 +70,10 @@ namespace clas12 {
   ///////////////////////////////////////////////////////
   /// Get pointer to traj banks for this particle
   /// This should be used directly to acess data
-  /// e.g. p->traj(TRAJ_CD1)->getCx();
-  ///      p->traj(TRAJ_CD4)->getX();
-  const traj_ptr region_cdet::traj(ushort det) const {
-    _traj->getIndex(_pentry,det);
+  /// e.g. p->traj(CND,CD1)->getCx(); //detecor with layer
+  ///      p->traj(CTOF)->getX();
+  const traj_ptr region_cdet::traj(ushort det,ushort layer) const {
+    _traj->getIndex(_pentry,det,layer);
     return _traj;
   }
 

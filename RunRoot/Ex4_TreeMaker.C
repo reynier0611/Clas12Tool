@@ -1,14 +1,16 @@
 //particleTree4 /dir/file.hipo out.root Ex4_TreeMaker.C
 {
+  //For hipo4 use EVNT4 , hipo3 EVNT
   //add event header branch
-  treemaker.UseEventData();
+  // treemaker.UseEventData(); //hipo4 only
   
   //make branch with given formula and alias it to name Time
   // treemaker.Branch("P.Time-EVNT4.StartTime/F","Time");
   //treemaker.Branch("P.Time-EVNT4.FTBStartTime/F","FTBTime");
   treemaker.Branch("P.Time/F");
   treemaker.Branch("P.Path/F");
-  treemaker.Branch("EVNT4.StartTime/F");
+  //treemaker.Branch("EVNT4.StartTime/F");//hipo4
+  //treemaker.Branch("EVNT.StartTime/F");//hipo3
   //Create branch names as bank items
   treemaker.Branch("PBANK.Px/F");
   treemaker.Branch("PBANK.Py/F");

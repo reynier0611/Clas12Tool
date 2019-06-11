@@ -48,6 +48,8 @@ namespace clas12 {
     void notify(){
       //printf("particle class is read again\n");
     }
+    void setEntry(int ind){}
+   void setBankEntry(int ind){}
 
   private :
 

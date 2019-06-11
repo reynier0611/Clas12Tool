@@ -78,7 +78,8 @@ void Ex1_CLAS12Reader(){
 
 
      while(event.next()==true){
-       event.head()->getStartTime();
+       // event.event()->getStartTime(); //hipo4
+       // event.head()->getStartTime(); //hipo3
         //Loop over all particles to see how to access detector info.
 	for(auto& p : event.getDetParticles()){
   	 //  get predefined selected information
@@ -99,7 +100,9 @@ void Ex1_CLAS12Reader(){
 	   p->trk(DC)->getSector();
 	   p->che(HTCC)->getNphe();
 	   p->che(LTCC)->getNphe();
-	   p->traj(TRAJ_HTCC)->getX();
+	   //trajectories
+	   p->traj(LTCC)->getX();
+	   // p->traj(DC,DC1)->getCx();; //First layer of DC, hipo4
 	   break;
 	 case FT :
 	   p->ft(FTCAL)->getEnergy();
@@ -126,7 +129,6 @@ void Ex1_CLAS12Reader(){
 	  pips.size()==1 &&pims.size() == 1){
        
 	 // set the particle momentum
-	 // i.e. auto el = electrons[0]->p4(); etc.
 	 SetLorentzVector(el,electrons[0]);
 	 SetLorentzVector(pr,protons[0]);
 	 SetLorentzVector(g1,gammas[0]);
@@ -139,6 +141,9 @@ void Ex1_CLAS12Reader(){
 	 TLorentzVector pi0 = g1+g2;
 	 hm2g->Fill(pi0.M());
 	 if(TMath::Abs(miss.M2())<0.5)hm2gCut->Fill(pi0.M());
+
+	 //could also get particle time etc. here too
+	 //Double_t eTime=electrons[0]->sci(FTOF1A)->getTime();
        }
      
        counter++;

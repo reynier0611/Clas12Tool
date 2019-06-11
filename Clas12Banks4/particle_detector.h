@@ -67,6 +67,7 @@ namespace clas12 {
    /*    return _index=-1; */
    /*  } */
     void setIndex(int ind){_index=ind;}
+    void setBankEntry(short i){ _index=i;} //faster for BankHist
     void setEntry(int ind){_index=ind;}
     
     ////////////////////////////////////////////////////////////////

@@ -41,7 +41,7 @@ namespace clas12 {
     bool sort() final;
 
     const scint_ptr sci(ushort lay) const final;
-    const traj_ptr traj(ushort det) const final;
+    const traj_ptr traj(ushort det,ushort layer=0) const final;
     const trck_ptr trk(ushort lay) const final{_trck->setIndex(_ptrck);return _trck;};
     
      

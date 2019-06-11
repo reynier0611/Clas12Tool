@@ -42,6 +42,7 @@ namespace clas12 {
     int getIndex(int pindex);
     void setIndex(int ind){_index=ind;}
     void setEntry(int ind){_index=ind;}
+    void setBankEntry(int ind){_index=ind;}
 
     const  CovMatrix* matrix();
     float getC11(){ return getFloat(_morder[0][0],_index);}
