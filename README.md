@@ -180,6 +180,12 @@ The script $CLAS12ROOT/RunRoot/Ex4_TreeMaker.C defines which branches are to be 
      treemaker.Branch("PBANK.Px/F"); //create tree with particle Px branch
 
 
+You can perform some arithmetic and define a new branch e.g.
+
+    	treemaker.Branch("P.Time-EVNT4.StartTime/F","Time"); //branch name Time
+  	treemaker.Branch("P.Time-EVNT4.FTBStartTime/F","FTBTime"); //branch name FTBTime
+
+
      treemaker.AddExactPid(11,1); //filter events with exactly 1 e-
      treemaker.AddAtLeastPid(211,1);//and at least 1 pi+
      treemaker.AddZeroOfRestPid(); //and zero of any other particle type (default is any)
