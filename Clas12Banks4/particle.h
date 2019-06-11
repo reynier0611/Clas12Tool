@@ -98,7 +98,7 @@ namespace clas12 {
       return sqrt(x*x+y*y+z*z);
     }
     
-    void setEntry(short i){ _entry=i;_ftbpar->setEntry(i);}
+    void setEntry(short i){ _entry=i;if(_ftbpar)_ftbpar->setEntry(i);}
     void setBankEntry(short i){ _entry=i;} //faster for BankHist
     short getEntry() const {return _entry;}
     /**

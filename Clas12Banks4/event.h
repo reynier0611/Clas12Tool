@@ -42,7 +42,7 @@ namespace clas12 {
     float  getProcTime(){ return getFloat(_pt_order,0); }
     double  getLiveTime(){ return getDouble(_lt_order,0); }
 
-    float  getFTBStartTime(){ return _ftev->getStartTime(); }
+    float  getFTBStartTime(){ if(_ftev) return _ftev->getStartTime();return 0; }
 
     /**
     * This is virtual method from hipo::bank it will be called
