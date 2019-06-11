@@ -25,6 +25,8 @@ The Clas12Root package depends on both Hipo and Clas12Banks. This provides ROOT-
 
 git clone --recurse-submodules https://github.com/dglazier/Clas12Tool.git
 
+git checkout dst4
+
 cd Clas12Tool
 
 
