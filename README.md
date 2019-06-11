@@ -231,7 +231,7 @@ Note mySelector is hard-coded in Ex3_ProofLite.C so for your own selector you sh
 
 As a more complete example you can check testSelector in RunRoot which implements the particle analysis and histogramming from Ex1. This can be run with Ex3b_TestSelector.C once you change the HipoChain files :
 
-         clas12proof4 8 testSelector.C+ Ex3b_TestSelector.C
+         clas12proof4 8 RunRoot/testSelector.C+ Ex3b_TestSelector.C
 
 
 ### Jupyter
