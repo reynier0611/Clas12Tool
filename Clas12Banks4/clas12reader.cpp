@@ -80,19 +80,19 @@ namespace clas12 {
     if(!passPidSelect()) return false;
 
     //now getthe data for the rest of the banks
-    _event.getStructure(*_bmcparts.get());
-    _event.getStructure(*_bcovmat.get());
-    _event.getStructure(*_brunconfig.get());
-    _event.getStructure(*_bevent.get());
-    _event.getStructure(*_bftbevent.get());
-    _event.getStructure(*_bcal.get());
-    _event.getStructure(*_bscint.get());
-    _event.getStructure(*_btrck.get());
-    _event.getStructure(*_btraj.get());
-    _event.getStructure(*_bcher.get());
-    _event.getStructure(*_bft.get());
-    _event.getStructure(*_bvtp.get());
-    _event.getStructure(*_bscal.get());
+    if(_bmcparts.get())_event.getStructure(*_bmcparts.get());
+    if(_bcovmat.get())_event.getStructure(*_bcovmat.get());
+    if(_brunconfig.get())_event.getStructure(*_brunconfig.get());
+    if(_bevent.get())_event.getStructure(*_bevent.get());
+    if(_bftbevent.get())_event.getStructure(*_bftbevent.get());
+    if(_bcal.get())_event.getStructure(*_bcal.get());
+    if(_bscint.get())_event.getStructure(*_bscint.get());
+    if(_btrck.get())_event.getStructure(*_btrck.get());
+    if(_btraj.get())_event.getStructure(*_btraj.get());
+    if(_bcher.get())_event.getStructure(*_bcher.get());
+    if(_bft.get())_event.getStructure(*_bft.get());
+    //if(_bvtp.get())_event.getStructure(*_bvtp.get());
+    //if(_bscal.get())_event.getStructure(*_bscal.get());
     return true;
   }
   ////////////////////////////////////////////////////////
