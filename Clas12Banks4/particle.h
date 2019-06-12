@@ -15,9 +15,9 @@
 #define PARTICLE_H
 
 #include "bank.h"
-#include "vectors.h"
 #include "dictionary.h"
 #include "ftbparticle.h"
+#include <cmath>
 #include <memory>
 
 namespace clas12 {

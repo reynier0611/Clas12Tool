@@ -18,7 +18,6 @@
 #include <vector>
 #include <memory>
 #include "bank.h"
-#include "vectors.h"
 
 namespace clas12 {
 

@@ -15,7 +15,7 @@
 #define MCPARTICLE_H
 
 #include "bank.h"
-#include "vectors.h"
+#include <cmath>
 #include <memory>
 
 namespace clas12 {
@@ -50,15 +50,15 @@ namespace clas12 {
     float  getVz()  { return getFloat(vz_order,_entry);}
     float  getMass()  { return getFloat(mass_order,_entry);}
  
-    void  getVector3(int index, vector3 &vect){
-      vect.setXYZ(getFloat(px_order,index),getFloat(py_order,index),
-            getFloat(pz_order,index));
-    }
+    /* void  getVector3(int index, vector3 &vect){ */
+    /*   vect.setXYZ(getFloat(px_order,index),getFloat(py_order,index), */
+    /*         getFloat(pz_order,index)); */
+    /* } */
 
-    void getVector4(int index, vector4 &vect, double mass){
-      vect.setXYZM(getFloat(px_order,index),getFloat(py_order,index),
-            getFloat(pz_order,index),getFloat(mass_order,index));
-    }
+    /* void getVector4(int index, vector4 &vect, double mass){ */
+    /*   vect.setXYZM(getFloat(px_order,index),getFloat(py_order,index), */
+    /*         getFloat(pz_order,index),getFloat(mass_order,index)); */
+    /* } */
 
     float getP(){
       auto x= getFloat(px_order,_entry);

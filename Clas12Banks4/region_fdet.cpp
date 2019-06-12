@@ -20,7 +20,7 @@ namespace clas12 {
   /// check if any FD detectors associated with
   /// current particle and store the detector indices
   bool region_fdet::sort(){
-    
+
     region_particle::sort();
     _ptof=-1;
     _pcal=-1;

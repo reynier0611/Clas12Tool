@@ -15,7 +15,6 @@
 #define SCALER_H
 
 #include "bank.h"
-#include "vectors.h"
 #include <memory>
 
 namespace clas12 {

@@ -78,11 +78,11 @@ void Ex1_CLAS12Reader(){
 
       //Add some event Pid based selections
       //////////c12.AddAtLeastPid(211,1); //at least 1 pi+
-      c12.addExactPid(11,1);    //exactly 1 electron
-      c12.addExactPid(211,1);    //exactly 1 pi+
-      c12.addExactPid(-211,1);    //exactly 1 pi-
-      c12.addExactPid(2212,1);    //exactly 1 proton
-      c12.addExactPid(22,2);    //exactly 2 gamma
+      //c12.addExactPid(11,1);    //exactly 1 electron
+      //c12.addExactPid(211,1);    //exactly 1 pi+
+      //c12.addExactPid(-211,1);    //exactly 1 pi-
+      //c12.addExactPid(2212,1);    //exactly 1 proton
+      //c12.addExactPid(22,2);    //exactly 2 gamma
       //////c12.addZeroOfRestPid();  //nothing else
       //////c12.useFTBased(); //and use the Pids from RECFT
       

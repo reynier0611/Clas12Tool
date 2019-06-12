@@ -15,7 +15,6 @@
 #define FTBPARTICLE_H
 
 #include "bank.h"
-#include "vectors.h"
 #include "dictionary.h"
 #include <memory>
 
