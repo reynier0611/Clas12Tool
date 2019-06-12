@@ -73,15 +73,25 @@ void Ex1_CLAS12Reader(){
  
    
    for(Int_t i=0;i<files->GetEntries();i++){
-     //create the hallb event
-      clas12reader event(files->At(i)->GetTitle());
+     //create the event reader
+      clas12reader c12(files->At(i)->GetTitle());
 
-
-     while(event.next()==true){
-       // event.event()->getStartTime(); //hipo4
-       // event.head()->getStartTime(); //hipo3
+      //Add some event Pid based selections
+      //////////c12.AddAtLeastPid(211,1); //at least 1 pi+
+      c12.addExactPid(11,1);    //exactly 1 electron
+      c12.addExactPid(211,1);    //exactly 1 pi+
+      c12.addExactPid(-211,1);    //exactly 1 pi-
+      c12.addExactPid(2212,1);    //exactly 1 proton
+      c12.addExactPid(22,2);    //exactly 2 gamma
+      //////c12.addZeroOfRestPid();  //nothing else
+      //////c12.useFTBased(); //and use the Pids from RECFT
+      
+      while(c12.next()==true){
+       // c12.event()->getStartTime(); //hipo4
+       // c12.head()->getStartTime(); //hipo3
         //Loop over all particles to see how to access detector info.
-	for(auto& p : event.getDetParticles()){
+    
+ 	for(auto& p : c12.getDetParticles()){
   	 //  get predefined selected information
 	 p->getTime();
 	 p->getDetEnergy();
@@ -117,14 +127,14 @@ void Ex1_CLAS12Reader(){
 	 // p->covmat()->print();
 	 p->cmat();
        }
-    
-       // get particles by type
-       auto electrons=event.getByID(11);
-       auto gammas=event.getByID(22);
-       auto protons=event.getByID(2212);
-       auto pips=event.getByID(211);
-       auto pims=event.getByID(-211);
 
+       // get particles by type
+       auto electrons=c12.getByID(11);
+       auto gammas=c12.getByID(22);
+       auto protons=c12.getByID(2212);
+       auto pips=c12.getByID(211);
+       auto pims=c12.getByID(-211);
+       
        if(electrons.size()==1 && gammas.size()==2 && protons.size()==1 &&
 	  pips.size()==1 &&pims.size() == 1){
        
@@ -145,7 +155,8 @@ void Ex1_CLAS12Reader(){
 	 //could also get particle time etc. here too
 	 //Double_t eTime=electrons[0]->sci(FTOF1A)->getTime();
        }
-     
+    
+       
        counter++;
      }
    }

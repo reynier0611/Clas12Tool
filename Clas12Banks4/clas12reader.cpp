@@ -59,7 +59,7 @@ namespace clas12 {
     if(_bftbparts.get())_event.getStructure(*_bftbparts.get());//FT based PID particle bank
     
     //First check if event passes criteria
-    _nparts=_bparts->getSize();
+    _nparts=_bparts->getRows();
     _pids.clear();
     _pids.reserve(_nparts);
 
@@ -76,7 +76,7 @@ namespace clas12 {
       }
 	
     }
-    //check if event is of the right type
+     //check if event is of the right type
     if(!passPidSelect()) return false;
 
     //now getthe data for the rest of the banks
@@ -108,10 +108,9 @@ namespace clas12 {
 	break;
     }
     if(!validEvent) return false;//no more events in reader
-
     //can proceed with valid event
     sort();
-    
+  
     return true;
   }
   ////////////////////////////////////////////////////////
@@ -139,7 +138,7 @@ namespace clas12 {
   void clas12reader::sort(){
 
     
-    _nparts=_bparts->getRows();
+    // _nparts=_bparts->getRows();
     _n_rfdets=0;
     _n_rcdets=0;
     _n_rfts=0;
@@ -191,6 +190,7 @@ namespace clas12 {
 	continue;
       }
     }
+ 
   }
   bool clas12reader::passPidSelect(){
     //if no selections take event
@@ -213,12 +213,13 @@ namespace clas12 {
 	  return false;
       }
     }
+ 
       //check for requested exact matches
     for(auto const& select : _pidSelectExact){
        if(!(select.second==getNPid(select.first)))
 	return false;
     }
-    
+ 
     //check for requeseted at least  matches
     for(auto const& select : _pidSelect){
       if((select.second>getNPid(select.first)))

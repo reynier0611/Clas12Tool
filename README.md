@@ -52,6 +52,8 @@ export PATH="$PATH":"$CLAS12TOOL/bin"
 If there are issues with cmake and your ROOTSYS you can try using the local FindROOT file. Edit the CMakeList.txt.hipo3 or 4 files removing the lines with comment ##USEROOTSYS and uncomment the line
 
    	 #######include("cmake/FindROOT.cmake")
+
+**Note just to help confuse you the first letter in bank items have been capitilised so where you might expect to use REC::Particle::pz, or particle->getpz(), you will find Pz will work better, similarly Time, Energy...You can check the bank header files e.g. Clas12Banks4/particle.h and look at the get function declarations e.g. getPz() rather than getpz() **
 	 
 ## interactive root session
 
@@ -61,11 +63,11 @@ To start an interactive session with pre-loaded Clas12Root us clas12root3 or cla
 
 This is faster than the particle draw as it only requires the reading of 1 bank.
 
-     	       clas12root4
+         clas12root4
 
-     	       BankHist bankDraw("/WHERE/IS/MY/HIPO/file.hipo");
-	       bankDraw.Hist1D("REC::Particle::Pz",100,0,10,"")->Draw()
-	       bankDraw.Hist1D("REC::Scintillator::Time",1000,0,200,"")->Draw()
+         BankHist bankDraw("/WHERE/IS/MY/HIPO/file.hipo");
+	 bankDraw.Hist1D("REC::Particle::Pz",100,0,10,"")->Draw()
+	 bankDraw.Hist1D("REC::Scintillator::Time",1000,0,200,"")->Draw()
 
 You can group histograms together for lazy execution if they all come from the same bank.
 

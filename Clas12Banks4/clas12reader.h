@@ -103,8 +103,11 @@ namespace clas12 {
     void addZeroOfRestPid(){_zeroOfRestPid=true;};
     
     bool passPidSelect();
+
+    void useFTBased(){_useFTBased=true;}
     
     int getNParticles() const {return _detParticles.size();}
+    const std::vector<short> &getPids() const {return _pids;}
     
   private:
 
@@ -137,10 +140,10 @@ namespace clas12 {
     std::vector<region_ft_ptr> _rfts;
     std::vector<region_part_ptr> _detParticles;
 
-    std::vector<int> _pids;
-    std::vector<int> _givenPids;
-    std::map<int,int> _pidSelect;
-    std::map<int,int> _pidSelectExact;
+    std::vector<short> _pids;
+    std::vector<short> _givenPids;
+    std::map<short,short> _pidSelect;
+    std::map<short,short> _pidSelectExact;
 
     ushort _nparts=0;
     ushort _n_rfdets=0;
