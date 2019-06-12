@@ -60,7 +60,7 @@ If there are issues with cmake and your ROOTSYS you can try using the local Find
 To start an interactive session with pre-loaded Clas12Root us clas12root3 or clas12root4 instead of root on the command line.
 
 ## Ex 0 Plotting an item from any bank (HIPO4)
-
+ 
 This is faster than the particle draw as it only requires the reading of 1 bank.
 
          clas12root4
