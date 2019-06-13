@@ -22,7 +22,8 @@ namespace clas12root{
       void    SlaveTerminate() final;
       void    Terminate() final;
 
-
+      void AddFilter() override;
+ 
   private:
 
       

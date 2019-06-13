@@ -24,7 +24,8 @@ namespace clas12root{
       void    SlaveTerminate() final;
       void    Terminate() final;
 
-
+      void AddFilter() override;
+      
   private:
 
       TLorentzVector _beam{0,0,10.6,10.6};

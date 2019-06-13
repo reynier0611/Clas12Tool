@@ -222,6 +222,13 @@ e.g.
     	    return kTRUE;    
   	 }
 
+You may also add event selections as above using the AddFilter function
+
+         void testSelector::AddFilter(){
+              _c12->addExactPid(11,1);    //exactly 1 electron
+          }
+
+
 To execute (note the + is important) :
 
 

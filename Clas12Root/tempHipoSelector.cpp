@@ -51,6 +51,9 @@ namespace clas12root{
     
   }
   
+  void testSelector::AddFilter(){
+    //   _c12->addExactPid(11,1);    //exactly 1 electron
+   }
 
   Bool_t tempHipoSelector::ProcessEvent(){
     //Equivalent to TSelector Process

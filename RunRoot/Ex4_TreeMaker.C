@@ -5,7 +5,7 @@
   // treemaker.UseEventData(); //hipo4 only
   
   //make branch with given formula and alias it to name Time
-  // treemaker.Branch("P.Time-EVNT4.StartTime/F","Time");
+  //treemaker.Branch("P.Time-EVNT4.StartTime/F","Time");
   //treemaker.Branch("P.Time-EVNT4.FTBStartTime/F","FTBTime");
   treemaker.Branch("P.Time/F");
   treemaker.Branch("P.Path/F");
@@ -19,14 +19,13 @@
   treemaker.Branch("PBANK.Vy/F");
   treemaker.Branch("PBANK.Vz/F");
   treemaker.Branch("PBANK.Pid/I");
-  
   //treemaker.Branch("PBANK.FTBPid/I");//Hipo4 DSTs
 
   //e.g. Only save electron information
   // treemaker.AddParticleCut("PBANK.Pid==11");
 
   //Event topology cuts
-  treemaker.AddAtLeastPid(211,1); //at least 1 pi+
+  //treemaker.AddAtLeastPid(211,1); //at least 1 pi+
   // treemaker.AddExactPid(11,1);    //exactly 1 electron
   // treemaker.AddZeroOfRestPid();  //nothing else, if not this line any of anything else
  

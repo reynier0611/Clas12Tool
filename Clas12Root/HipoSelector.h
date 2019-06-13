@@ -35,7 +35,8 @@ namespace clas12root{
       Bool_t  Process(Long64_t entry) override;
      
       virtual Bool_t ProcessEvent() =  0; //loop action to be defined in derived class
-      
+
+      virtual void AddFilter(){};
  
   protected:
       

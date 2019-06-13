@@ -83,6 +83,7 @@ namespace clas12root{
       _NcurrRecords= _c12->getReader().getNRecords(); //records in this file
       _iRecord=entry-_NfileRecords; //get first record in this file to process
 
+      AddFilter();
      }
 
     _c12->getReader().loadRecord(_iRecord);
