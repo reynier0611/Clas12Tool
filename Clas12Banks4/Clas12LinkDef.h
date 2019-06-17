@@ -6,6 +6,8 @@
 #pragma link C++ nestedclasses;
  
 //#pragma link C++ defined_in "utils.h";
+#pragma link C++ class clas12::helflip+;
+#pragma link C++ class clas12::helonline+;
 #pragma link C++ class clas12::runconfig+;
 #pragma link C++ class clas12::event+;
 #pragma link C++ class clas12::ftbevent+;

@@ -29,6 +29,8 @@
 #include "vtp.h"
 #include "scaler.h"
 #include "covmatrix.h"
+#include "helonline.h"
+#include "helflip.h"
 #include "forwardtagger.h"
 #include "region_particle.h"
 #include "region_fdet.h"
@@ -79,6 +81,8 @@ namespace clas12 {
     }
 
 
+    const helonline_ptr helonline() const{return _bhelonline;};
+    const helflip_ptr helflip() const{return _bhelflip;};
     const runconfig_ptr runconfig() const{return _brunconfig;};
     const event_ptr event() const{return _bevent;};
     const ftbevent_ptr ftbevent() const{return _bftbevent;};
@@ -116,6 +120,8 @@ namespace clas12 {
     hipo::event      _event;
 
     //DST banks
+    helonline_ptr  _bhelonline;
+    helflip_ptr  _bhelflip;
     runconfig_ptr  _brunconfig;
     event_ptr  _bevent;
     ftbevent_ptr  _bftbevent;

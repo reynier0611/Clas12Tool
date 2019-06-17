@@ -24,6 +24,8 @@ namespace clas12root {
     _mapOfParts["REC::Event"]="event";
     _mapOfParts["RECFT::Event"]="ftbevent";
     _mapOfParts["RUN::config"]="runconfig";
+    _mapOfParts["HEL::online"]="helonline";
+    _mapOfParts["HEL::flip"]="helflip";
   
 
   }

@@ -29,6 +29,8 @@ namespace clas12 {
     if(factory.hasSchema("REC::Traj"))_btraj  = std::make_shared<traj>(factory.getSchema("REC::Traj"));
     if(factory.hasSchema("REC::Cherenkov"))_bcher  = std::make_shared<cherenkov>(factory.getSchema("REC::Cherenkov"));
     if(factory.hasSchema("REC::ForwardTagger"))_bft    = std::make_shared<forwardtagger>(factory.getSchema("REC::ForwardTagger"));
+    if(factory.hasSchema("HEL::online"))_bhelonline  = std::make_shared<clas12::helonline>(factory.getSchema("HEL::online"));
+    if(factory.hasSchema("HEL::flip"))_bhelflip  = std::make_shared<clas12::helflip>(factory.getSchema("HEL::flip"),_brunconfig);
     //if(factory.hasSchema("RAW::vtp"))_bvtp    = std::make_shared<clas12::vtp>(factory.getSchema("RAW::vtp"));
     //if(factory.hasSchema("RAW::scaler"))_bscal = std::make_shared<clas12::scaler>(factory.getSchema("RAW::scaler"));
 
@@ -55,7 +57,17 @@ namespace clas12 {
   }
   bool clas12reader::readEvent(){
     _reader.read(_event);
-    _event.getStructure(*_bparts.get());//regular particle bank
+
+    //Special banks
+    if(_brunconfig.get())_event.getStructure(*_brunconfig.get());
+
+    //Comment in next 3 lines for helicity analysis
+    //if(_bhelflip.get())_event.getStructure(*_bhelflip.get());
+    //if(_bhelonline.get())_event.getStructure(*_bhelonline.get());
+    //if(_bhelflip.get()->getRows()>0) _bhelflip->helicityAnalysis();
+
+    //regular particle bank
+    _event.getStructure(*_bparts.get());
     if(_bftbparts.get())_event.getStructure(*_bftbparts.get());//FT based PID particle bank
     
     //First check if event passes criteria
@@ -82,7 +94,6 @@ namespace clas12 {
     //now getthe data for the rest of the banks
     if(_bmcparts.get())_event.getStructure(*_bmcparts.get());
     if(_bcovmat.get())_event.getStructure(*_bcovmat.get());
-    if(_brunconfig.get())_event.getStructure(*_brunconfig.get());
     if(_bevent.get())_event.getStructure(*_bevent.get());
     if(_bftbevent.get())_event.getStructure(*_bftbevent.get());
     if(_bcal.get())_event.getStructure(*_bcal.get());

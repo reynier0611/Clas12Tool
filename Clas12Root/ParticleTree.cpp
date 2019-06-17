@@ -47,8 +47,12 @@ namespace clas12root {
     _mapOfParts["EVNTFT"]="c12.ftbevent()->";
 
     //RUN
-     _mapOfParts["RUN"]="c12.runconfig()->";
-     
+    _mapOfParts["RUN"]="c12.runconfig()->";
+
+     //HELICITY
+    _mapOfParts["HELFLIP"]="c12.helflip()->";
+    _mapOfParts["HELONLINE"]="c12.helonline()->";
+  
     //C12
     _mapOfParts["C12"]="c12.";
     _mapOfParts["C12.NPid"]="c12.getNPid";
@@ -111,6 +115,8 @@ namespace clas12root {
       if(obj)place =lines->IndexOf(obj)+1;
       lines->AddAt(new TObjString("      auto evbank=c12.event();"),place++);
       lines->AddAt(new TObjString("      auto runbank=c12.runconfig();"),place++);
+      lines->AddAt(new TObjString("      auto helfbank=c12.helflip();"),place++);
+      lines->AddAt(new TObjString("      auto helobank=c12.helonline();"),place++);
 
       obj=macro.GetLineWith("Fill Event Data");
       if(obj)place =lines->IndexOf(obj)+1;
@@ -126,7 +132,9 @@ namespace clas12root {
       lines->AddAt(new TObjString("	_eventdata->Helicity=evbank->getHelicity();"),place++);
       lines->AddAt(new TObjString("	_eventdata->HelicityRaw=evbank->getHelicityRaw();"),place++);
       lines->AddAt(new TObjString("	_eventdata->EventNumber=runbank->getEvent();"),place++);
-
+      lines->AddAt(new TObjString("	if(helobank.get())_eventdata->onlineHelicity=helobank->getCurrHelicity();"),place++);
+      lines->AddAt(new TObjString("	if(helfbank.get())_eventdata->flipHelicity=helfbank->getCurrHelicity();"),place++);
+ 
     }
 
     TString strvar{"if(PCCCC)_treedata"};

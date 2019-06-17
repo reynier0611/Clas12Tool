@@ -34,6 +34,8 @@ namespace clas12root{
     int    Helicity=0;
     int    HelicityRaw=0;
     int    EventNumber=0;
+    int    onlineHelicity=0;
+    int    flipHelicity=0;
 
     ClassDef(event_data,1);
   };

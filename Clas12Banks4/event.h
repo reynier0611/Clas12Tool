@@ -6,13 +6,12 @@
 
 /*
  * File:   event.h
- * Author: gavalian
+ * Author: dglazier
  *
- * Created on April 27, 2017, 10:01 AM
  */
 
-#ifndef EVENT_EVENT_H
-#define EVENT_EVENT_H
+#ifndef CLAS12_EVENT_H
+#define CLAS12_EVENT_H
 
 #include <iostream>
 #include <vector>

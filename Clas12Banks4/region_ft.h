@@ -8,7 +8,6 @@
  * File:   region_ft.h
  * Author: dglazier
  *
- * Created on April 27, 2017, 10:01 AM
  */
 
 #ifndef REGION_FT_H
