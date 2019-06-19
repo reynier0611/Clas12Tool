@@ -60,14 +60,6 @@ namespace clas12 {
       if(_index>-1)return getFloat(_z_order,_index);
       return 0;
     }
-    double getTheta(){ 
-      if(_index>-1)return getFloat(_theta_order,_index);
-      return 0;
-    }
-    double getPhi(){ 
-      if(_index>-1)return getFloat(_phi_order,_index);
-      return 0;
-    }
     double getDtheta(){ 
       if(_index>-1)return getFloat(_dtheta_order,_index);
       return 0;
@@ -93,8 +85,6 @@ namespace clas12 {
     int       _x_order=-1;
     int       _y_order=-1;
     int       _z_order=-1;
-    int       _theta_order=-1;
-    int       _phi_order=-1;
     int    _chi2_order=-1;
     int    _status_order=-1;
   

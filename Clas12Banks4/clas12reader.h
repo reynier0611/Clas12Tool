@@ -94,7 +94,9 @@ namespace clas12 {
     std::vector<region_part_ptr>& getDetParticles(){return _detParticles;}
     std::vector<region_part_ptr>* getDetParticlesPtr(){return &_detParticles;}
     std::vector<region_part_ptr> getByID(int id);
-
+    std::vector<region_part_ptr> getByRegion(int ir);
+    std::vector<region_part_ptr> getByCharge(int ch);
+    
     short getNPid(short pid){return std::count(_pids.begin(),_pids.end(), pid);};
     void addAtLeastPid(short pid,short n){
       _pidSelect[pid]=n;

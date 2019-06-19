@@ -52,7 +52,6 @@ namespace clas12 {
     virtual ~particle() = default;
     
     
-    //    void   init(const char *bankName, hipo::reader &r);
     int    getPid(int index) { return getInt(_pid_order,index);}
     float  getPx(int index)  { return getFloat(_px_order,index);}
     float  getPy(int index)  { return getFloat(_py_order,index);}
@@ -81,16 +80,7 @@ namespace clas12 {
     float  getFTBBeta()  { return _ftbpar->getBeta();}
     float  getFTBChi2Pid()  { return _ftbpar->getChi2Pid();}
     int    getFTBStatus()  { return _ftbpar->getStatus();}
-  /* void  getVector3(int index, vector3 &vect){ */
-    /*   vect.setXYZ(getFloat(_px_order,index),getFloat(_py_order,index), */
-    /*         getFloat(_pz_order,index)); */
-    /* } */
 
-    /* void getVector4(int index, vector4 &vect, double mass){ */
-    /*   vect.setXYZM(getFloat(_px_order,index),getFloat(_py_order,index), */
-    /*         getFloat(_pz_order,index),mass); */
-    /* } */
- 
     float getP(){
       auto x= getFloat(_px_order,_entry);
       auto y= getFloat(_py_order,_entry);

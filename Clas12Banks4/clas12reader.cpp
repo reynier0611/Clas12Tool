@@ -201,6 +201,13 @@ namespace clas12 {
 	continue;
       }
     }
+    // //If additional particle sources, add those particles to detParticles
+    // if(_additionalParticleSource.size()){
+    //   for(auto &psource : _additionalParticleSource)
+    // 	while(auto& particle=psource.nextParticle()){
+    // 	  _detParticles.push_back(particle);
+    // 	}
+    // }
  
   }
   bool clas12reader::passPidSelect(){
@@ -244,6 +251,14 @@ namespace clas12 {
   std::vector<region_part_ptr> clas12reader::getByID(int id){
     return container_filter(_detParticles, [id](region_part_ptr dr)
 			    {return dr->getPid()==id;});
+  }
+  std::vector<region_part_ptr> clas12reader::getByRegion(int ir){
+    return container_filter(_detParticles, [ir](region_part_ptr dr)
+			    {return dr->getRegion()==ir;});
+  }
+  std::vector<region_part_ptr> clas12reader::getByCharge(int ch){
+    return container_filter(_detParticles, [ch](region_part_ptr dr)
+			    {return dr->par()->getCharge()==ch;});
   }
 
 }

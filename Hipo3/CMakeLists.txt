@@ -2,7 +2,7 @@
 ROOT_GENERATE_DICTIONARY(G__Hipo3 utils.h dictionary.h node.h event.h record.h reader.h bank.h  LINKDEF HipoLinkDef.h)
 
 add_library(Hipo3 SHARED utils.cpp dictionary.cpp node.cpp event.cpp record.cpp reader.cpp bank.cpp G__Hipo3.cxx)
-target_link_libraries(Hipo3 ${ROOT_LIBRARIES})
+target_link_libraries(Hipo3 ${ROOT_LIBRARIES}  ${LZ4_LINK_LIBRARY})
 
 install(TARGETS Hipo3
   LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")

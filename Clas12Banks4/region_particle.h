@@ -52,7 +52,7 @@ namespace clas12 {
     virtual ~region_particle()=default;
 
     ////////////////////////////////////////////////////////////
-    /// derived classes must define there own sort
+    /// derived classes must define their own sort
     /// i.e. how the detector banks relate to that region
     virtual bool sort(){
       _pentry=_parts->getEntry();

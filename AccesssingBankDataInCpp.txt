@@ -193,8 +193,29 @@ particles[i]->cmat()->getC55();
 particles[i]->cmat()->matrix();
 // e.g. auto cm = particles[i]->cmat()->matrix();
 //   =>   C11=cm[0][0];  C14=cm[0][3];  C41=cm[3][0];
+////////////////////////////////////////////////////////////////////////////
+// MC::Lund
+// For the jth particle in the lund file
+c12.mcparts()->getPid(j);
+c12.mcparts()->getPx(j);
+c12.mcparts()->getPy(j);
+c12.mcparts()->getPz(j);
+c12.mcparts()->getVx(j);
+c12.mcparts()->getVy(j);
+c12.mcparts()->getVz(j);
+c12.mcparts()->getMass(j);
+or
+c12.mcparts()->setEntry(j);
+c12.mcparts()->getPid();
+c12.mcparts()->getPx();
+c12.mcparts()->getPy();
+c12.mcparts()->getPz();
+c12.mcparts()->getVx();
+c12.mcparts()->getVy();
+c12.mcparts()->getVz();
+c12.mcparts()->getMass();
 //////////////////////////////////////////////////////////////////////////////////////
-//BANKS NOT ASSOCIATED WITH PARTICLES
+//BANKS NOT ASSOCIATED WITH PARTICLE TRACKS
 /////////////////////////////////////////////////////////////////////////////////////
 //REC::Event (HIPO4) (HIPO3=>event->head)
 c12.event()->getCategory();

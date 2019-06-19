@@ -21,8 +21,6 @@ namespace clas12 {
     if(useItem("status"))_status_order  = __schema.getEntryOrder("status");
     if(useItem("sector"))_sector_order  = __schema.getEntryOrder("sector");
     if(useItem("chi2"))_chi2_order  = __schema.getEntryOrder("chi2");
-    if(useItem("theta"))_theta_order  = __schema.getEntryOrder("theta");
-    if(useItem("phi"))_phi_order  = __schema.getEntryOrder("phi");
     if(useItem("dtheta"))_dtheta_order  = __schema.getEntryOrder("dtheta");
     if(useItem("dphi"))_dphi_order  = __schema.getEntryOrder("dphi");
   }
