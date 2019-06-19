@@ -2,8 +2,14 @@
 // to set the workers run like :
 //clas12root4 'LoadProofLib4.C(N)'
 void LoadProofLib4(Int_t Nworkers=1){
+
+
+  Bool_t ISMAC=kFALSE;
+  if(TString(gSystem->Getenv("OSTYPE"))==TString("darwin"))
+    ISMAC=kTRUE;
   
-  gSystem->Load("libProof.so");
+  gSystem->Load("libProof");
+  
   TProof *proof =nullptr;
   if(!gProof) 
     proof = TProof::Open("://lite");
@@ -22,9 +28,17 @@ void LoadProofLib4(Int_t Nworkers=1){
   gSystem->Exec(Form("cp $CLAS12TOOL/lib/libHipo4_rdict.pcm %s/cache/.",sandbox.Data()));
   gSystem->Exec(Form("cp $CLAS12TOOL/lib/libClas12Banks4_rdict.pcm %s/cache/.",sandbox.Data()));
   gSystem->Exec(Form("cp $CLAS12TOOL/lib/libClas12Root4_rdict.pcm %s/cache/.",sandbox.Data()));
-  
-  gProof->Load(TString(gSystem->Getenv("CLAS12TOOL"))+"/lib/libHipo4.so",kTRUE);
-  gProof->Load(TString(gSystem->Getenv("CLAS12TOOL"))+"/lib/libClas12Banks4.so",kTRUE);
-  gProof->Load(TString(gSystem->Getenv("CLAS12TOOL"))+"/lib/libClas12Root4.so",kTRUE);
+
+  if(!ISMAC){
+    gProof->Load(TString(gSystem->Getenv("CLAS12TOOL"))+"/lib/libHipo4.so",kTRUE);
+    gProof->Load(TString(gSystem->Getenv("CLAS12TOOL"))+"/lib/libClas12Banks4.so",kTRUE);
+    gProof->Load(TString(gSystem->Getenv("CLAS12TOOL"))+"/lib/libClas12Root4.so",kTRUE);
+  }
+  else{
+    gProof->Load(TString(gSystem->Getenv("CLAS12TOOL"))+"/lib/libHipo4.dylib",kTRUE);
+    gProof->Load(TString(gSystem->Getenv("CLAS12TOOL"))+"/lib/libClas12Banks4.dylib",kTRUE);
+    gProof->Load(TString(gSystem->Getenv("CLAS12TOOL"))+"/lib/libClas12Root4.dylib",kTRUE);
+
+  }
   
 }
