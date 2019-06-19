@@ -1,3 +1,5 @@
+set(BUILD_SHARED_LIBS ON)
+
 if(USE_HIPO3)
   set(CLAS12ROOT Clas12Root3)
   set(CLAS12BANKS Clas12Banks3)

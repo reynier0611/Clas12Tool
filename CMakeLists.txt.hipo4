@@ -3,13 +3,35 @@ project(clas12hipo4root)
 
 option (USE_HIPO4 
         "Use hipo4 libs" ON)
-	
+
+set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_INSTALL_BINDIR ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 set(CMAKE_INSTALL_LIBDIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(CMAKE_INSTALL_MANDIR ${CMAKE_CURRENT_SOURCE_DIR}/man)
 set(CMAKE_CXX_FLAGS "-fPIC -O3")
 
+# use, i.e. don't skip the full RPATH for the build tree
+SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
+
+# when building, don't use the install RPATH already
+# (but later on when installing)
+SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+
+SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+
+# add the automatically determined parts of the RPATH
+# which point to directories outside the build tree to the install RPATH
+SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
+
+# the RPATH to be used when installing, but only if it's not a system directory
+#LIST(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir)
+#IF("${isSystemDir}" STREQUAL "-1")
+#   SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+#ENDIF("${isSystemDir}" STREQUAL "-1")
+
+set(CMAKE_MACOSX_RPATH 1)
 
 ##########For local ROOT cmake files comment in the line below and remove the lines commented ##USEROOTSYS
 #######include("cmake/FindROOT.cmake")
@@ -37,6 +59,8 @@ add_definitions(-D__LZ4__)
 
 #after Lz4 change include to include
 set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+set(BUILD_SHARED_LIBS ON)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Hipo4)
 add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/Hipo4)

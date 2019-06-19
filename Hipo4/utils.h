@@ -55,8 +55,8 @@ namespace hipo {
   class benchmark {
      private:
 
-       std::chrono::high_resolution_clock clock;
-       std::chrono::time_point<std::chrono::high_resolution_clock> first, second;
+    // std::chrono::high_resolution_clock clock;
+    // std::chrono::time_point<std::chrono::high_resolution_clock> first, second;
 
        long running_time;
        int  counter;

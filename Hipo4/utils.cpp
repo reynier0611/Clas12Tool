@@ -191,18 +191,18 @@ namespace hipo {
 
 
   void  benchmark::resume(){
-    first = clock.now();
+    //first = clock.now();
     //auto start = clock.now();
     counter++;
   }
 
   void  benchmark::pause(){
 
-    second = clock.now();
-    std::chrono::nanoseconds diff_ms =
-        std::chrono::duration_cast< std::chrono::nanoseconds >( second-first );
+    // second = clock.now();
+    //std::chrono::nanoseconds diff_ms =
+    //   std::chrono::duration_cast< std::chrono::nanoseconds >( second-first );
         //printf(" count = %lld\n",diff_ms.count());
-     running_time += diff_ms.count();
+    //running_time += diff_ms.count();
   }
 
   long  benchmark::getTime(){
