@@ -43,7 +43,16 @@ namespace clas12root{
       TString HIPOROOT=TString(gSystem->Getenv("CLAS12TOOL"))+"/Clas12Root/";
       TMacro macro(HIPOROOT+"template"+_tempActionName+".C");
       _curMacro=_tempDir+Form("asdf%d__%s__.C",_Nruns,_tempActionName.Data());
-  
+      Int_t NtempFiles=1;
+      TString tempMacro=_curMacro;
+      while(gSystem->FindFile(_tempDir,tempMacro)){
+	cout<<_curMacro<<endl;
+	_curMacro=_tempDir+Form("asdf%d__%s__.C",_Nruns+NtempFiles++*1000,_tempActionName.Data());
+	tempMacro=_curMacro;
+      }
+      cout<<"CURR MACRO "<<_curMacro<<endl;
+
+	
       TString strline=macro.GetLineWith("NNNN")->GetString();
       _actionClassName=_tempActionName+Form("%d",_Nruns);
       strline.ReplaceAll("NNNNN",_actionClassName);
