@@ -68,7 +68,7 @@ particles[i]->par()->getFTBCharge();
 particles[i]->par()->getFTBStatus();
 /////////////////////////////////////////////////////////////////////////////////////////
 // REC::Scintillator
-// DET can be replaced with FTOF1A, FTOF1B, FTOF2, CND, CTOF
+// DET can be replaced with FTOF1A, FTOF1B, FTOF2, CND1, CND2, CND3, CTOF
 particles[i]->sci(DET)->getPindex();
 particles[i]->sci(DET)->getDetector();
 particles[i]->sci(DET)->getLayer();
