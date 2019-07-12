@@ -8,7 +8,10 @@ set(INCLUDES
 
 include_directories(${INCLUDES})
 add_executable(helloWord helloWord.cpp)
-target_link_libraries(helloWord ${ROOT_LIBRARIES} lz4 Hipo4 Clas12Banks4)
+target_link_libraries(helloWord ${ROOT_LIBRARIES} Hipo4 Clas12Banks4)
+
+add_executable(clasReactions clasReactions.cpp)
+target_link_libraries(clasReactions ${ROOT_LIBRARIES} Hipo4 Clas12Banks4)
 
 #add_executable(readFile readFile.cpp)
 #target_link_libraries(readFile Hipo4 ${ROOT_LIBRARIES} )
